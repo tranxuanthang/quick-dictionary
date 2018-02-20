@@ -35,15 +35,15 @@ async function wiktionary(keyword, language){
 	let htmlResult = jsonResult.parse.text["*"];
 
 	/* Fix URLs */
-	var replace = "\"//" + lang + ".wiktionary.org";
+	var replace = "\"//" + language + ".wiktionary.org";
 	var re = new RegExp(replace, "g");
-	htmlResult = htmlResult.replace(re, "\"https://" + lang + ".wiktionary.org");
+	htmlResult = htmlResult.replace(re, "\"https://" + language + ".wiktionary.org");
 	htmlResult = htmlResult.replace(/\"\/\/upload.wikimedia.org/g, "\"https://upload.wikimedia.org");
 	htmlResult = htmlResult.replace(/\"\/\/commons.wikimedia.org/g, "\"https://commons.wikimedia.org");
-	htmlResult = htmlResult.replace(/\"\/static\//g, "\"https://" + lang + ".wiktionary.org/static/");
-	htmlResult = htmlResult.replace(/\"\/wiki\/(.*?)\"/g, "\"" + location.pathname + "?nolower=1&lang=" + lang + "&text=$1\"");
-	htmlResult = htmlResult.replace(/\"\/wiki\//g, "\"https://" + lang + ".wiktionary.org/wiki/");
-	htmlResult = htmlResult.replace(/\"\/w\//g, "\"https://" + lang + ".wiktionary.org/w/");
+	htmlResult = htmlResult.replace(/\"\/static\//g, "\"https://" + language + ".wiktionary.org/static/");
+	htmlResult = htmlResult.replace(/\"\/wiki\/(.*?)\"/g, "\"" + location.pathname + "#input=$1\"");
+	htmlResult = htmlResult.replace(/\"\/wiki\//g, "\"https://" + language + ".wiktionary.org/wiki/");
+	htmlResult = htmlResult.replace(/\"\/w\//g, "\"https://" + language + ".wiktionary.org/w/");
 	return htmlResult;
 }
 
@@ -60,13 +60,36 @@ async function googleTranslate(keyword,language){
 }
 
 async function printResult(keyword,language){
+	keyword = decodeURI(keyword).replace(/_/g, ' ');
+	document.getElementById('inputframe').value = keyword;
 	let wiktionaryResult;
 	try{
 		wiktionaryResult = await wiktionary(keyword,language);
 		document.getElementById('result').innerHTML = wiktionaryResult;
+
 	}
 	catch (error){
-		document.getElementById('result').innerHTML = chrome.i18n.getMessage("popup_wiktionary_not_found");
+		document.getElementById('result').innerHTML = chrome.i18n.getMessage("popup_wiktionary_not_found")+` Error: ${error}`;
 	}
-	
 }
+
+document.addEventListener('DOMContentLoaded',function(event){
+	document.getElementById("searchform").addEventListener("submit",async function(event){
+		let inputText = document.getElementById("inputframe").value;
+		printResult(inputText,'vi');
+		event.preventDefault();
+	});
+	document.getElementById("searchform").addEventListener("submit",async function(event){
+		let inputText = document.getElementById("inputframe").value;
+		printResult(inputText,'vi');
+		event.preventDefault();
+	});
+
+	document.getElementById('result').addEventListener('click', function(event){
+		if(event.target.href === undefined) return;
+		let qdInput = event.target.hash.substr(1).split('=')[1];
+		if(qdInput === undefined) return;
+		printResult(qdInput,'vi');
+		event.preventDefault();
+	});
+});

@@ -61,12 +61,12 @@ button.primary:active, input[type="submit"].primary:active{
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
-	padding: 8px;
 }
 
 #header {
 	flex: 0;
 	margin-bottom: 8px;
+	padding: 8px 8px 0 8px;
 }
 
 #main {
@@ -99,6 +99,9 @@ button.primary:active, input[type="submit"].primary:active{
 	margin-right: 4px;
 }
 
+#result {
+	padding: 8px;
+}
 #totop {
 	position: fixed;
 	bottom: 24px;
