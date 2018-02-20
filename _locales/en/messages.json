@@ -18,7 +18,7 @@
 		"message": "Let's try selecting a word and reopen this popup."
 	},
 	"popup_wiktionary_not_found": {
-		"message": "The text you're finding the meaning was not found in Wiktionary. Redirecting to Google Translate..."
+		"message": "The text you're finding the meaning was not found in Wiktionary!"
 	},
 	"popup_error_text_too_long": {
 		"message": "Error: The text you selected is too long."

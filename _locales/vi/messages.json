@@ -18,7 +18,7 @@
 		"message": "Hãy thử chọn một từ bằng cách bôi đen từ cần dịch, sau đó mở hộp thoại này."
 	},
 	"popup_wiktionary_not_found": {
-		"message": "Nội dung bạn chọn không tồn tại ở Wiktionary. Đang thử tìm nghĩa với Google Dịch..."
+		"message": "Nội dung bạn chọn không tồn tại ở Wiktionary!"
 	},
 	"popup_error_text_too_long": {
 		"message": "Lỗi: Từ bạn chọn quá dài."

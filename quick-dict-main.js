@@ -24,10 +24,14 @@ function makeRequest(method, url) {
 	});
 }
 
-async function wiktionary(keyword, language) {
+async function wiktionary(keyword, language){
 	let url = 'https://' + language + '.wiktionary.org/w/api.php?action=parse&format=json&contentmodel=wikitext&redirects=true&prop=text&page=' + keyword;
 	let rawResult = await makeRequest('GET',url);
 	let jsonResult = JSON.parse(rawResult);
+
+	let error = jsonResult.error;
+	if (error !== undefined) throw new Error('wiktionary_not_found');
+
 	let htmlResult = jsonResult.parse.text["*"];
 
 	/* Fix URLs */
@@ -43,7 +47,26 @@ async function wiktionary(keyword, language) {
 	return htmlResult;
 }
 
+async function googleTranslate(keyword,language){
+	var url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" 
+	+ "auto" + "&tl=" + language + "&dt=t&q=" + encodeURI(keyword);
+	let rawResult = await makeRequest('GET',url);
+	let jsonResult = JSON.parse(rawResult);
+	return jsonResult[0].map(
+		function(element){
+			return element[0];
+		}
+	).join("");
+}
+
 async function printResult(keyword,language){
-	document.getElementById('result').innerHTML = await wiktionary(keyword,language);
-	return 0;
+	let wiktionaryResult;
+	try{
+		wiktionaryResult = await wiktionary(keyword,language);
+		document.getElementById('result').innerHTML = wiktionaryResult;
+	}
+	catch (error){
+		document.getElementById('result').innerHTML = chrome.i18n.getMessage("popup_wiktionary_not_found");
+	}
+	
 }
