@@ -1,0 +1,65 @@
+{
+	"ext_name": {
+		"message": "Từ Điển Nhanh - Quick Dictionary"
+	},
+	"ext_desc": {
+		"message": "Phần mở rộng giúp dịch nhanh từ được bôi đen bằng Wiktionary tiếng Việt."
+	},
+	"popup_input_placeholder": {
+		"message": "Nhập từ muốn dịch..."
+	},
+	"popup_input_submit": {
+		"message": "Tìm"
+	},
+	"popup_config_link": {
+		"message": "Thiết lập"
+	},
+	"popup_no_selected_text": {
+		"message": "Hãy thử chọn một từ bằng cách bôi đen từ cần dịch, sau đó mở hộp thoại này."
+	},
+	"popup_wiktionary_not_found": {
+		"message": "Nội dung bạn chọn không tồn tại ở Wiktionary. Đang thử tìm nghĩa với Google Dịch..."
+	},
+	"popup_error_text_too_long": {
+		"message": "Lỗi: Từ bạn chọn quá dài."
+	},
+	"popup_getting_result": {
+		"message": "Đợi tý, hiện ra ngay..."
+	},
+	"popup_more_information": {
+		"message": "Xem thêm tại "
+	},
+	"config_quickButton_desc": {
+		"message": "Nút dịch nhanh ngay trên từ đang chọn:"
+	},
+	"config_wiktionary_language_desc": {
+		"message": "Ngôn ngữ Wiktionary (2 ký tự, vd: vi, en, ru, ja,...):"
+	},
+	"config_wiktionary_language_1": {
+		"message": "Ngôn ngữ 1 (bắt buộc):"
+	},
+	"config_wiktionary_language_2": {
+		"message": "Ngôn ngữ 2 (tuỳ chọn):"
+	},
+	"config_submit": {
+		"message": "Lưu lại"
+	},
+	"config_goback": {
+		"message": "Trở về"
+	},
+	"config_yes": {
+		"message": "Có"
+	},
+	"config_no": {
+		"message": "Không"
+	},
+	"config_success": {
+		"message": "Đã lưu thay đổi (bạn nên tải lại các tab đang mở)."
+	},
+	"config_error_1": {
+		"message": "Ngôn ngữ 1 không được để trống."
+	},
+	"config_error_2": {
+		"message": "2 ngôn ngữ không được trùng nhau."
+	}
+}

@@ -1,0 +1,65 @@
+{
+	"ext_name": {
+		"message": "Quick Dictionary"
+	},
+	"ext_desc": {
+		"message": "This extension helps you quickly translate any selected text in the web to any languages with Wiktionary."
+	},
+	"popup_input_placeholder": {
+		"message": "Type something..."
+	},
+	"popup_input_submit": {
+		"message": "Search"
+	},
+	"popup_config_link": {
+		"message": "Config"
+	},
+	"popup_no_selected_text": {
+		"message": "Let's try selecting a word and reopen this popup."
+	},
+	"popup_wiktionary_not_found": {
+		"message": "The text you're finding the meaning was not found in Wiktionary. Redirecting to Google Translate..."
+	},
+	"popup_error_text_too_long": {
+		"message": "Error: The text you selected is too long."
+	},
+	"popup_getting_result": {
+		"message": "Getting result..."
+	},
+	"popup_more_information": {
+		"message": "More at "
+	},
+	"config_quickButton_desc": {
+		"message": "Quick Button that shows right above your selected text:"
+	},
+	"config_wiktionary_language_desc": {
+		"message": "Wiktionary Language (2 chars, example: vi, en, ru, ja,...):"
+	},
+	"config_wiktionary_language_1": {
+		"message": "Language #1 (required):"
+	},
+	"config_wiktionary_language_2": {
+		"message": "Language #2 (optional):"
+	},
+	"config_submit": {
+		"message": "Save"
+	},
+	"config_goback": {
+		"message": "Go Back"
+	},
+	"config_yes": {
+		"message": "Yes"
+	},
+	"config_no": {
+		"message": "No"
+	},
+	"config_success": {
+		"message": "Saved (you should reload opening tabs)."
+	},
+	"config_error_1": {
+		"message": "Language #1 can't be empty."
+	},
+	"config_error_2": {
+		"message": "Two languages can't be the same."
+	}
+}
