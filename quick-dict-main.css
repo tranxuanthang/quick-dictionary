@@ -5,95 +5,98 @@ body {
 	word-wrap: break-word;
 	background-color: #fff;
 }
+
 button, input {
-    border: 0px;
-    border-radius: 2px;
-    height: 32px;
-    padding: 0 8px;
-    font-size: 13px;
-    font-weight: 400;
-    min-width: 132px;
-    width: auto;
+	border: 0px;
+	border-radius: 2px;
+	height: 32px;
+	padding: 0 8px;
+	font-size: 13px;
+	font-weight: 400;
+	min-width: 132px;
+	width: auto;
 }
 
 input:not([type=submit]) {
-    color: #0c0c0d;
-    border: 1px solid rgba(12, 12, 13, 0.3);
-    font-size: 15px;
+	color: #0c0c0d;
+	border: 1px solid rgba(12, 12, 13, 0.3);
+	font-size: 15px;
 }
 
 input:not([type=submit]):hover {
-    border: 1px solid rgba(12, 12, 13, 0.5);
+	border: 1px solid rgba(12, 12, 13, 0.5);
 }
 
 input:not([type=submit]):focus {
-    border: 1px solid #0a84ff;
+	border: 1px solid #0a84ff;
 }
 
 button, input[type="submit"] {
-    color: #0c0c0d;
-    background-color: rgba(12, 12, 13, 0.1);
+	color: #0c0c0d;
+	background-color: rgba(12, 12, 13, 0.1);
 }
 
 button:hover, input[type="submit"]:hover{
-    background: rgba(12, 12, 13, 0.2);
+	background: rgba(12, 12, 13, 0.2);
 }
 
 button:active, input[type="submit"]:active{
-    background: rgba(12, 12, 13, 0.3);
+	background: rgba(12, 12, 13, 0.3);
 }
 
 button.primary, input[type="submit"].primary {
-    color: #ffffff;
-    background: #0060df;
+	color: #ffffff;
+	background: #0060df;
 }
 
 button.primary:hover, input[type="submit"].primary:hover{
-    background: #003eaa;
+	background: #003eaa;
 }
 
 button.primary:active, input[type="submit"].primary:active{
-    background: #002275;
+	background: #002275;
 }
 
 #container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 8px;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	padding: 8px;
 }
 
 #header {
-    flex: 0;
-    margin-bottom: 8px;
+	flex: 0;
+	margin-bottom: 8px;
 }
 
 #main {
-    flex: 1;
-    overflow-y: auto;
+	flex: 1;
+	overflow-y: auto;
 }
 
 #search {
-    margin-bottom: 4px;
+	margin-bottom: 4px;
 }
 
 #searchform {
-    display: flex;
+	display: flex;
 }
 
 #searchinput {
-    flex: 1;
-    margin-right: 4px;
+	flex: 1;
+	margin-right: 4px;
 }
+
 #inputframe {
-    width: 100%;
+	width: 100%;
 }
+
 #searchsubmit {
-    flex: 0;
+	flex: 0;
 }
 
 #primlang {
-    margin-right: 4px;
+	margin-right: 4px;
 }
 
 #totop {
