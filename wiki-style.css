@@ -1,111 +1,111 @@
 /* WIKI PARSE STYLE */
 
-#result a.new,
-#result a.new:visited,
-#result a.new:hover {
+.qdExt_result a.new,
+.qdExt_result a.new:visited,
+.qdExt_result a.new:hover {
 	color: #cc0000;
 }
 
-#result hr {
+.qdExt_result hr {
 	display: none;
 }
 
-#result p {
+.qdExt_result p {
 	margin: 0;
 	padding: 0.17em;
 }
 
-#result #toc {
+.qdExt_result #toc {
 	font-size: x-small;
 	padding: 4px;
 }
 
-#result #toc ul {
+.qdExt_result #toc ul {
 	margin: 0;
 }
 
-#result .toctitle,
-#result .toclevel-2,
-#result .tocnumber,
-#result .noprint,
-#result .wikitable {
+.qdExt_result .toctitle,
+.qdExt_result .toclevel-2,
+.qdExt_result .tocnumber,
+.qdExt_result .noprint,
+.qdExt_result .wikitable {
 	display: none;
 }
 
-#result .toclevel-1 {
+.qdExt_result .toclevel-1 {
 	display: inline-block;
 	list-style-type: none;
 }
 
-#result .toclevel-1 a {
+.qdExt_result .toclevel-1 a {
 	padding: 1px 4px;
 }
 
-#result .toclevel-1 a:hover {
+.qdExt_result .toclevel-1 a:hover {
 	background: #ee5830;
 	color: white;
 }
 
-#result #rank {
+.qdExt_result #rank {
 	display: none;
 }
 
-#result .mw-editsection {
+.qdExt_result .mw-editsection {
 	display: none;
 }
 
-#result .mw-body-content h3 {
+.qdExt_result .mw-body-content h3 {
 	font-size: 1.2em;
 }
 
-#result dt {
+.qdExt_result dt {
 	font-weight: bold;
 	margin-bottom: 0.1em;
 }
 
-#result dl {
+.qdExt_result dl {
 	margin-top: 0.2em;
 	margin-bottom: 0.5em;
 }
 
-#result li {
+.qdExt_result li {
 	margin-bottom: 0.1em;
 }
 
-#result .mw-body-content h3,
-#result .mw-body-content h4 {
+.qdExt_result .mw-body-content h3,
+.qdExt_result .mw-body-content h4 {
 	font-weight: bold;
 }
 
-#result .mw-body-content h3 {
+.qdExt_result .mw-body-content h3 {
 	font-size: 1.2em;
 }
 
-#result .mw-body-content h3,
-#result .mw-body-content h4,
-#result .mw-body-content h5,
-#result .mw-body-content h6 {
+.qdExt_result .mw-body-content h3,
+.qdExt_result .mw-body-content h4,
+.qdExt_result .mw-body-content h5,
+.qdExt_result .mw-body-content h6 {
 	line-height: 1.6;
 	margin-top: 0.3em;
 	margin-bottom: 0;
 	padding-bottom: 0;
 }
 
-#result h3,
-#result h4,
-#result h5 {
+.qdExt_result h3,
+.qdExt_result h4,
+.qdExt_result h5 {
 	margin-bottom: 0.3em;
 }
 
-#result h3 {
+.qdExt_result h3 {
 	font-size: 128%;
 }
-#result h1,
-#result h2,
-#result h3,
-#result h4,
-#result h5,
-#result h6 {
+.qdExt_result h1,
+.qdExt_result h2,
+.qdExt_result h3,
+.qdExt_result h4,
+.qdExt_result h5,
+.qdExt_result h6 {
 	color: #000;
 	background: none;
 	font-weight: normal;
@@ -115,7 +115,7 @@
 	/*border-bottom: 1px solid #a2a9b1;*/
 }
 
-#result h2 {
+.qdExt_result h2 {
 	text-align: center;
 	font-size: 150%;
 	line-height: inherit;
@@ -126,7 +126,7 @@
 	color: #ee5830;
 }
 
-#result h3 {
+.qdExt_result h3 {
 	font-size: 120%;
 	line-height: inherit;
 	font-weight: bold;
@@ -134,62 +134,62 @@
 	color: #00a9ec;
 }
 
-#result h3 a {
+.qdExt_result h3 a {
 	color: #00a9ec;
 }
 
-#result h4 {
+.qdExt_result h4 {
 	font-size: 110%;
 	line-height: inherit;
 	font-weight: bold;
 	text-transform: uppercase;
 }
 
-#result h5 {
+.qdExt_result h5 {
 	font-size: 90%;
 	line-height: inherit;
 }
 
-#result h6 {
+.qdExt_result h6 {
 	font-size: 80%;
 	line-height: inherit;
 }
 
-#result .mw-content-ltr ul,
-#result .mw-content-rtl .mw-content-ltr ul {
+.qdExt_result .mw-content-ltr ul,
+.qdExt_result .mw-content-rtl .mw-content-ltr ul {
 	margin: 0.3em 0 0 1.6em;
 	padding: 0;
 }
 
-#result ul {
+.qdExt_result ul {
 	list-style-type: disc;
 	list-style-image: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22…%229.5%22%20r%3D%222.5%22%20fill%3D%22%2300528c%22%2F%3E%0A%3C%2Fsvg%3E%0A);
 	list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAANCAIAAADuXjPfAAAABnRST…t9AAAAHklEQVR4AWP4jwrowWcI6oEgEBtIISNCfFT9mOYDACO/lbNIGC/yAAAAAElFTkSuQmCC) \9;
 }
 
-#result ul {
+.qdExt_result ul {
 	list-style-type: square;
 	margin: 0.3em 0 0 1.6em;
 	padding: 0;
 }
 
-#result ol,
-#result ul {
+.qdExt_result ol,
+.qdExt_result ul {
 	margin: 0.3em 0 0 3.2em;
 	padding: 0;
 }
 
-#result a:visited {
+.qdExt_result a:visited {
 	color: #0645ad;
 }
 
-#result a {
+.qdExt_result a {
 	text-decoration: none;
 	color: #0645ad;
 	background: none;
 }
 
-#result .external {
+.qdExt_result .external {
 	background-position: center right;
 	background-repeat: no-repeat;
 	background-image: url(/img/external.png);

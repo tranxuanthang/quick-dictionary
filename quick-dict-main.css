@@ -13,7 +13,7 @@ button, input {
 	padding: 0 8px;
 	font-size: 13px;
 	font-weight: 400;
-	min-width: 132px;
+	min-width: 66px;
 	width: auto;
 }
 
@@ -29,18 +29,30 @@ input:not([type=submit]):hover {
 
 input:not([type=submit]):focus {
 	border: 1px solid #0a84ff;
+	box-shadow: 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3);
+	outline: 0;
 }
 
 button, input[type="submit"] {
 	color: #0c0c0d;
 	background-color: rgba(12, 12, 13, 0.1);
+	text-align: center;
 }
 
-button:hover, input[type="submit"]:hover{
+button:focus, input[type="submit"]:focus {
+	box-shadow: 0 0 0 1px #0a84ff inset, 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3);
+	outline: 0;
+}
+
+button:disabled, input[type="submit"]:disabled {
+	opacity: 0.4;
+}
+
+button:not([disabled]):hover, input[type="submit"]:not([disabled]):hover{
 	background: rgba(12, 12, 13, 0.2);
 }
 
-button:active, input[type="submit"]:active{
+button:not([disabled]):active, input[type="submit"]:not([disabled]):active{
 	background: rgba(12, 12, 13, 0.3);
 }
 
@@ -48,12 +60,11 @@ button.primary, input[type="submit"].primary {
 	color: #ffffff;
 	background: #0060df;
 }
-
-button.primary:hover, input[type="submit"].primary:hover{
+button.primary:not([disabled]):hover, input[type="submit"].primary:not([disabled]):hover{
 	background: #003eaa;
 }
 
-button.primary:active, input[type="submit"].primary:active{
+button.primary:not([disabled]):active, input[type="submit"].primary:not([disabled]):active{
 	background: #002275;
 }
 
@@ -65,8 +76,9 @@ button.primary:active, input[type="submit"].primary:active{
 
 #header {
 	flex: 0;
-	margin-bottom: 8px;
-	padding: 8px 8px 0 8px;
+	padding: 8px 8px 8px 8px;
+	background-color: #f9f9fa;
+	border-bottom: 1px solid #ededf0;
 }
 
 #main {
@@ -112,8 +124,7 @@ button.primary:active, input[type="submit"].primary:active{
 	background-color: #ee5830;
 	color: white;
 	cursor: pointer;
-	padding: 3px;
-	opacity: 0.5;
+	opacity: 0.1;
 	font-size: 10px;
 }
 

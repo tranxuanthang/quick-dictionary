@@ -1,0 +1,165 @@
+#qdExt_quickButton {
+	opacity: 0.4;
+	height: 16px;
+	width: 16px;
+	background-size: 16px;
+	color:#000000;
+	padding:0px;
+	z-index:10000;
+	border-radius:2px;
+	background-image: url(/img/icon.png);
+	position:absolute;
+}
+
+#qdExt_quickButton:hover {
+	opacity: 1;
+}
+
+#qdExt_quickPopup {
+	height: 300px;
+	width: 480px;
+	position:absolute;
+	top: 0;
+	left: 0;
+	z-index:10000;
+	background-color: #fff;
+	border-radius: 2px;
+	border: 1px solid #ededf0;
+}
+
+
+
+#qdExt_quickPopup {
+	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+	line-height: 1.3;
+	font-size: 0.875rem;
+	word-wrap: break-word;
+	background-color: #fff;
+}
+
+#qdExt_quickPopup button, #qdExt_quickPopup input {
+	border: 0px;
+	border-radius: 2px;
+	height: 32px;
+	padding: 0 8px;
+	font-size: 13px;
+	font-weight: 400;
+	min-width: 66px;
+	width: auto;
+}
+
+#qdExt_quickPopup input:not([type=submit]) {
+	color: #0c0c0d;
+	border: 1px solid rgba(12, 12, 13, 0.3);
+	font-size: 15px;
+}
+
+#qdExt_quickPopup input:not([type=submit]):hover {
+	border: 1px solid rgba(12, 12, 13, 0.5);
+}
+
+#qdExt_quickPopup input:not([type=submit]):focus {
+	border: 1px solid #0a84ff;
+	box-shadow: 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3);
+	outline: 0;
+}
+
+#qdExt_quickPopupbutton, #qdExt_quickPopup input[type="submit"] {
+	color: #0c0c0d;
+	background-color: rgba(12, 12, 13, 0.1);
+	text-align: center;
+}
+
+#qdExt_quickPopupbutton:focus, #qdExt_quickPopup input[type="submit"]:focus {
+	box-shadow: 0 0 0 1px #0a84ff inset, 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3);
+	outline: 0;
+}
+
+#qdExt_quickPopup button:disabled, #qdExt_quickPopup input[type="submit"]:disabled {
+	opacity: 0.4;
+}
+
+#qdExt_quickPopup button:not([disabled]):hover, #qdExt_quickPopup input[type="submit"]:not([disabled]):hover{
+	background: rgba(12, 12, 13, 0.2);
+}
+
+#qdExt_quickPopup button:not([disabled]):active, #qdExt_quickPopup input[type="submit"]:not([disabled]):active{
+	background: rgba(12, 12, 13, 0.3);
+}
+
+#qdExt_quickPopup button.primary, #qdExt_quickPopup input[type="submit"].primary {
+	color: #ffffff;
+	background: #0060df;
+}
+#qdExt_quickPopup button.primary:not([disabled]):hover, #qdExt_quickPopup input[type="submit"].primary:not([disabled]):hover{
+	background: #003eaa;
+}
+
+#qdExt_quickPopup button.primary:not([disabled]):active, #qdExt_quickPopup input[type="submit"].primary:not([disabled]):active{
+	background: #002275;
+}
+
+#qdExt_quickPopup #container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+#qdExt_quickPopup #header {
+	flex: 0;
+	padding: 8px 8px 8px 8px;
+	background-color: #f9f9fa;
+	border-bottom: 1px solid #ededf0;
+}
+
+#qdExt_quickPopup #main {
+	flex: 1;
+	overflow-y: auto;
+}
+
+#qdExt_quickPopup #search {
+	margin-bottom: 4px;
+}
+
+#qdExt_quickPopup #searchform {
+	display: flex;
+}
+
+#qdExt_quickPopup #searchinput {
+	flex: 1;
+	margin-right: 4px;
+}
+
+#qdExt_quickPopup #inputframe {
+	width: 100%;
+}
+
+#qdExt_quickPopup #searchsubmit {
+	flex: 0;
+}
+
+#qdExt_quickPopup #primlang {
+	margin-right: 4px;
+}
+
+#qdExt_quickPopup #result {
+	padding: 8px;
+}
+#qdExt_quickPopup #totop {
+	position: fixed;
+	bottom: 24px;
+	right: 24px;
+	z-index: 99;
+	border: none;
+	outline: none;
+	background-color: #ee5830;
+	color: white;
+	cursor: pointer;
+	opacity: 0.1;
+	font-size: 10px;
+}
+
+#qdExt_quickPopup #totop:hover {
+	background-color: #dc1515;
+	opacity: 1;
+}
