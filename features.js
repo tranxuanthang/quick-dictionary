@@ -64,6 +64,7 @@ async function smartGetResult(keyword, language) {
 	keyword = decodeURI(keyword).replace(/_/g, " ");
 
 	// Put the searching keyword to #inputframe
+	if(document.getElementById("inputframe") !== null)
 	document.getElementById("inputframe").value = keyword;
 
 	// Get wiktionary result and put it to #result
@@ -76,6 +77,6 @@ async function smartGetResult(keyword, language) {
 	catch (error) {
 		//return chrome.i18n.getMessage("popup_wiktionary_not_found") + ` Error: ${error}`;
 		let googleTranslateResult = await googleTranslate(keyword, language);
-		return googleTranslateResult;
+		return `<div id="googletranslate">${googleTranslateResult}</div>`;
 	}
 }

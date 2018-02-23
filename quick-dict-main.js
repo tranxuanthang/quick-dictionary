@@ -6,9 +6,9 @@ function getCurrentLanguage() {
 
 function submitHandle(savedData) {
 	return async function (event) {
+		if (event) event.preventDefault();
 		let inputText = document.getElementById("inputframe").value;
 		document.getElementById("result").innerHTML = await smartGetResult(inputText, getCurrentLanguage() || savedData.primLang);
-		if (event) event.preventDefault();
 	};
 }
 
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 	let primLangButton = document.getElementById("primlang");
 	let secoLangButton = document.getElementById("secolang");
 
-	// Update saved value to switch buttons
+	// Update saved value to switch buttons (primary button, secondary button)
 	primLangButton.textContent = savedData.primLang;
 	if (savedData.secolang == "") {
 		secoLangButton.textContent = "n/a";
@@ -32,9 +32,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 	} else {
 		secoLangButton.textContent = savedData.secoLang;
 	}
+
+	// Set "current language" in sessionStorage to primary language after load
 	sessionStorage.setItem("currentLanguage", savedData.primLang);
 
-	// Detect click event to switch buttons
+	// Detect click event to "primary language" button
 	primLangButton.addEventListener("click", function () {
 		sessionStorage.setItem("currentLanguage", savedData.primLang);
 		primLangButton.classList.add("primary");
@@ -42,6 +44,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 		let inputText = document.getElementById("inputframe").value;
 		if (inputText != "") submitHandle(savedData)();
 	});
+
+	// Detect click event for "secondary language" button
 	secoLangButton.addEventListener("click", function () {
 		sessionStorage.setItem("currentLanguage", savedData.secoLang);
 		primLangButton.classList.remove("primary");
@@ -62,10 +66,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 		event.preventDefault();
 	});
 
+	// For sidebar, listen the click "quick button" event from content script
 	browser.runtime.onMessage.addListener(async function (request) {
 		if (request.type === "search_for_meaning") {
 			let inputText = request.text;
 			document.getElementById("result").innerHTML = await smartGetResult(inputText, getCurrentLanguage() || savedData.primLang);
 		}
 	});
+
+	// Check the URL after loaded, if there is a #input then get the meaning
+	let inputAtLoad =  window.location.hash.substr(1).split("=")[1];
+	if(inputAtLoad !== undefined)
+	document.getElementById("result").innerHTML = await smartGetResult(inputAtLoad, getCurrentLanguage() || savedData.primLang);
 });

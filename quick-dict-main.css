@@ -60,12 +60,32 @@ button.primary, input[type="submit"].primary {
 	color: #ffffff;
 	background: #0060df;
 }
+
 button.primary:not([disabled]):hover, input[type="submit"].primary:not([disabled]):hover{
 	background: #003eaa;
 }
 
 button.primary:not([disabled]):active, input[type="submit"].primary:not([disabled]):active{
 	background: #002275;
+}
+
+button.micro, input[type="submit"].micro {
+	height: 24px;
+	font-size: 11px;
+	width: auto;
+}
+
+button.red, input[type="submit"].red {
+	color: #ffffff;
+	background: #d70022;
+}
+
+button.red:not([disabled]):hover, input[type="submit"].red:not([disabled]):hover{
+	background: #a4000f;
+}
+
+button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):active{
+	background: #5a0002;
 }
 
 #container {
@@ -114,6 +134,28 @@ button.primary:not([disabled]):active, input[type="submit"].primary:not([disable
 #result {
 	padding: 8px;
 }
+
+#result #googletranslate {
+	text-align: center;
+	font-size: 100%;
+    line-height: inherit;
+	border-left: 6px solid #4286f4;
+	border-right: 6px solid #4286f4;
+	font-weight: bold;
+	padding: 6px;
+	color: #5e5e5e;
+}
+
+#options {
+	display: flex;
+}
+#languagechooser {
+	flex: 1;
+}
+#settings {
+	flex: 0;
+}
+
 #totop {
 	position: fixed;
 	bottom: 24px;

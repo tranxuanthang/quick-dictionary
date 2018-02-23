@@ -1,12 +1,12 @@
 #qdExt_quickButton {
-	opacity: 0.4;
+	opacity: 0.1;
 	height: 16px;
 	width: 16px;
 	background-size: 16px;
-	color:#000000;
-	padding:0px;
-	z-index:10000;
-	border-radius:2px;
+	color: #000000;
+	padding: 0px;
+	z-index: 10000;
+	border-radius: 2px;
 	background-image: url(/img/icon.png);
 	position:absolute;
 }
@@ -15,6 +15,15 @@
 	opacity: 1;
 }
 
+#qdExt_cover {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.2);
+	top: 0;
+	left: 0;
+	z-index: 9999;
+}
 #qdExt_quickPopup {
 	height: 300px;
 	width: 480px;
@@ -26,8 +35,6 @@
 	border-radius: 2px;
 	border: 1px solid #ededf0;
 }
-
-
 
 #qdExt_quickPopup {
 	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
