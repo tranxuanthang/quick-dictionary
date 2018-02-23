@@ -1,46 +1,5 @@
 "use strict";
 
-/* From https://stackoverflow.com/a/26495188 */
-/*
-function getSelectionCoords() {
-	var sel = document.selection, range, rect;
-	var x = 0, y = 0;
-	if (window.getSelection) {
-		sel = window.getSelection();
-		if (sel.rangeCount) {
-			range = sel.getRangeAt(0).cloneRange();
-			if (range.getClientRects) {
-				range.collapse(true);
-				if (range.getClientRects().length > 0) {
-					rect = range.getClientRects()[0];
-					console.log(range.getBoundingClientRect());
-					x = rect.left;
-					y = rect.top;
-				}
-			}
-			// Fall back to inserting a temporary element
-			if (x == 0 && y == 0) {
-				var span = document.createElement("span");
-				if (span.getClientRects) {
-					// Ensure span has dimensions and position by
-					// adding a zero-width space character
-					span.appendChild(document.createTextNode("\u200b"));
-					range.insertNode(span);
-					rect = span.getClientRects()[0];
-					x = rect.left;
-					y = rect.top;
-					var spanParent = span.parentNode;
-					spanParent.removeChild(span);
-
-					// Glue any broken text nodes back together
-					spanParent.normalize();
-				}
-			}
-		}
-	}
-	return { x: x, y: y };
-}*/
-
 function getMouseCoords(event) {
 	var eventDoc, doc, body;
 
@@ -74,18 +33,7 @@ function showQuickButton(x,y) {
 			quickButton.setAttribute("style", "display: none;");
 		}
 	} else {
-		/*
-		let coords = getSelectionCoords();
-
-		var range = window.getSelection().getRangeAt(0);
-		range.collapse(false);
-		var dummy = document.createElement("span");
-		range.insertNode(dummy);
-		var rect = dummy.getBoundingClientRect();
-		console.log('rect: ',rect);
-		dummy.parentNode.removeChild(dummy);
-		*/
-		quickButton.setAttribute("style", `top: ${y - 48}px; left: ${x}px;`);
+		quickButton.setAttribute("style", `top: ${y - 48}px; left: ${x - 8}px;`);
 		quickButton.setAttribute("data-selected-text", txtSel);
 		quickButton.setAttribute("data-coord-x", x);
 		quickButton.setAttribute("data-coord-y", y);
@@ -146,10 +94,11 @@ function showQuickButton(x,y) {
 		cover.setAttribute("style", "display: none;");
 	});
 
+	// Handle Quick Button
 	document.addEventListener("mouseup", function (event) {
 		let coords = getMouseCoords(event);
 		setTimeout(function() {
 			showQuickButton(coords.x, coords.y);
-		},100);
+		},50);
 	});
 })();

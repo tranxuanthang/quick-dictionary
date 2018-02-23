@@ -146,12 +146,21 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 	color: #5e5e5e;
 }
 
-#options {
+#options, #header_popup {
 	display: flex;
 }
-#languagechooser {
+#languagechooser, languagechooser_popup {
 	flex: 1;
 }
+#languagechooser_popup {
+	flex: 0 0 auto;
+	margin-right: 8px;
+}
+
+#search_popup {
+	flex: 1;
+}
+
 #settings {
 	flex: 0;
 }
