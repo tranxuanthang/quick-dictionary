@@ -61,5 +61,8 @@
 	},
 	"config_error_2": {
 		"message": "2 ngôn ngữ không được trùng nhau."
+	},
+	"popup_nothing_here": {
+		"message": "Hiện giờ không có gì ở đây hết ʕ•ᴥ•ʔ"
 	}
 }

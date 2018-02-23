@@ -18,7 +18,6 @@
 				"https://*/*"
 			],
 			"js": [
-				"features.js",
 				"content.js"
 			],
 			"css": [

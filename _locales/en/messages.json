@@ -61,5 +61,8 @@
 	},
 	"config_error_2": {
 		"message": "Two languages can't be the same."
+	},
+	"popup_nothing_here": {
+		"message": "Nothing here right now ʕ•ᴥ•ʔ"
 	}
 }

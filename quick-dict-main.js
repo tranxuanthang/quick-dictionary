@@ -8,6 +8,7 @@ function submitHandle(savedData) {
 	return async function (event) {
 		if (event) event.preventDefault();
 		let inputText = document.getElementById("inputframe").value;
+		document.getElementById("result").innerHTML = chrome.i18n.getMessage("popup_getting_result");
 		document.getElementById("result").innerHTML = await smartGetResult(inputText, getCurrentLanguage() || savedData.primLang);
 	};
 }
@@ -62,6 +63,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 		if (event.target.href === undefined) return;
 		let qdInput = event.target.hash.substr(1).split("=")[1];
 		if (qdInput === undefined) return;
+		document.getElementById("result").innerHTML = chrome.i18n.getMessage("popup_getting_result");
 		document.getElementById("result").innerHTML = await smartGetResult(qdInput, getCurrentLanguage() || savedData.primLang);
 		event.preventDefault();
 	});
@@ -70,12 +72,19 @@ document.addEventListener("DOMContentLoaded", async function () {
 	browser.runtime.onMessage.addListener(async function (request) {
 		if (request.type === "search_for_meaning") {
 			let inputText = request.text;
+			document.getElementById("result").innerHTML = chrome.i18n.getMessage("popup_getting_result");
 			document.getElementById("result").innerHTML = await smartGetResult(inputText, getCurrentLanguage() || savedData.primLang);
 		}
 	});
 
 	// Check the URL after loaded, if there is a #input then get the meaning
 	let inputAtLoad =  window.location.hash.substr(1).split("=")[1];
-	if(inputAtLoad !== undefined)
-	document.getElementById("result").innerHTML = await smartGetResult(inputAtLoad, getCurrentLanguage() || savedData.primLang);
+	if(inputAtLoad !== undefined) {
+		document.getElementById("result").innerHTML = chrome.i18n.getMessage("popup_getting_result");
+		document.getElementById("result").innerHTML = await smartGetResult(inputAtLoad, getCurrentLanguage() || savedData.primLang);
+	}
+
+	document.getElementById("totop").addEventListener("click", function (){
+		document.getElementById("main").scrollTo(0, 0);
+	});
 });

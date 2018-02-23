@@ -108,7 +108,7 @@ function showQuickButton(x,y) {
 	// Listen click event for "quick button"
 	quickButton.addEventListener("click", async function () {
 		// Get selected text
-		let selectedText = encodeURIComponent(quickButton.getAttribute("data-selected-text").toLowerCase());
+		let selectedText = quickButton.getAttribute("data-selected-text").trim();
 		
 		// Send message to the sidebar (assuming sidebar is available)
 		chrome.runtime.sendMessage({ type: "search_for_meaning", text: selectedText });
@@ -118,6 +118,7 @@ function showQuickButton(x,y) {
 		//console.log(getSidebarStatus);
 
 		// If sidebar is not available
+		if(getSidebarStatus === undefined) getSidebarStatus = {response: false};
 		if (getSidebarStatus.response == false) {
 			// Show the cover
 			cover.setAttribute("style", "display: block;");
@@ -132,10 +133,7 @@ function showQuickButton(x,y) {
 			quickPopup.setAttribute("sandbox", "allow-same-origin allow-scripts");
 			document.getElementsByTagName("body")[0].appendChild(quickPopup);
 			quickPopup.src = browser.extension.getURL(`/quickpopup.html#input=${selectedText}`);
-			quickPopup.setAttribute("style", `top: ${y + 48}px; left: ${x}px;`);
-
-			// Get the result for the "quick popup"
-			quickPopup.innerHTML = await smartGetResult(selectedText,"vi");
+			quickPopup.setAttribute("style", `top: ${y + 48}px; left: ${x - 8}px;`);
 		}
 	});
 
