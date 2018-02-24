@@ -104,6 +104,11 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 #main {
 	flex: 1;
 	overflow-y: auto;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+	cursor: auto;
 }
 
 #search {

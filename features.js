@@ -25,7 +25,6 @@ function makeRequest(method, url) {
 }
 
 async function wiktionary(keyword, language) {
-	keyword = keyword.toLowerCase();
 	let url = "https://" + language + ".wiktionary.org/w/api.php?action=parse&format=json&contentmodel=wikitext&redirects=true&prop=text&page=" + keyword;
 	let rawResult = await makeRequest("GET", url);
 	let jsonResult = JSON.parse(rawResult);
