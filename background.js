@@ -5,6 +5,7 @@ async function checkMessage(request,tabs) {
 	if (request.type == "sidebar_status") {
 		return new Promise(async function (resolve) {
 			let gettingIsOpen = await browser.sidebarAction.isOpen({});
+			console.log(gettingIsOpen);
 			resolve({ response: gettingIsOpen });
 		});
 	}

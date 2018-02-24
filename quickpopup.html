@@ -8,6 +8,7 @@
 		<script src="localize.js" charset="UTF-8"></script>
 		<link rel="stylesheet" href="modern-normalize.css">
 		<link rel="stylesheet" href="quick-dict-main.css">
+		<link rel="stylesheet" href="quickpopup.css">
 		<link rel="stylesheet" href="wiki-style.css">
 	</head>
 	<body>
@@ -20,8 +21,9 @@
                     <div id="search_popup">
                         <form id="searchform">
                             <div id="searchinput">
-                                <input type="text" name="text" id="inputframe" autocomplete="off" placeholder="Type something..." autofocus>
-                            </div>
+                                <input list="suggestions" type="text" name="text" id="inputframe" autocomplete="off" placeholder="Type something..." autofocus>
+								<datalist id="suggestions"></datalist>
+							</div>
                         </form>
                     </div>
                 </div>

@@ -16,7 +16,8 @@
 				<div id="search">
 					<form id="searchform">
 						<div id="searchinput">
-							<input type="text" name="text" id="inputframe" autocomplete="off" placeholder="Type something..." autofocus>
+							<input list="suggestions" type="text" name="text" id="inputframe" autocomplete="off" placeholder="Type something..." autofocus>
+							<datalist id="suggestions"></datalist>
 						</div>
 						<div id="searchsubmit">
 							<input type="submit" name="go" id="submitbutton" value="Search" class="primary">
@@ -26,7 +27,7 @@
 				<div id="options"><button id="primlang" class="primary">n/a</button><button id="secolang" class="">n/a</button></div>
 			</div>
 			<div id="main">
-				<div id="result" class="qdExt_result">Nothing here right now ʕ•ᴥ•ʔ</div>
+				<div id="result" class="qdExt_result"><span id="nothing">Nothing here right now ʕ•ᴥ•ʔ</span></div>
 			</div>
 			<button id="totop" title="Go to top">&#9650;</button>
 		</div>

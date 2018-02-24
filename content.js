@@ -66,7 +66,6 @@ function showQuickButton(x,y) {
 		//console.log(getSidebarStatus);
 
 		// If sidebar is not available
-		if(getSidebarStatus === undefined) getSidebarStatus = {response: false};
 		if (getSidebarStatus.response == false) {
 			// Show the cover
 			cover.setAttribute("style", "display: block;");
@@ -79,9 +78,9 @@ function showQuickButton(x,y) {
 			let quickPopup = document.createElement("iframe");
 			quickPopup.setAttribute("id", "qdExt_quickPopup");
 			quickPopup.setAttribute("sandbox", "allow-same-origin allow-scripts");
-			document.getElementsByTagName("body")[0].appendChild(quickPopup);
 			quickPopup.src = browser.extension.getURL(`/quickpopup.html#input=${selectedText}`);
-			quickPopup.setAttribute("style", `top: ${y + 48}px; left: ${x - 8}px;`);
+			quickPopup.setAttribute("style", `top: ${y + 16}px; left: ${x}px;`);
+			document.getElementsByTagName("body")[0].appendChild(quickPopup);
 		}
 	});
 
