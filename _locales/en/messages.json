@@ -30,7 +30,7 @@
 		"message": "More at "
 	},
 	"config_quickButton_desc": {
-		"message": "Quick Button that shows right above your selected text:"
+		"message": "Show Quick Button that shows right above your selected text."
 	},
 	"config_wiktionary_language_desc": {
 		"message": "Wiktionary Language (2 chars, example: vi, en, ru, ja,...):"

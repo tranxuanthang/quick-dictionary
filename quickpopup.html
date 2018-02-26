@@ -1,37 +1,42 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Quick Dictionary</title>
-		<script src="features.js" charset="UTF-8"></script>
-		<script src="quick-dict-main.js" charset="UTF-8"></script>
-		<script src="localize.js" charset="UTF-8"></script>
-		<link rel="stylesheet" href="modern-normalize.css">
-		<link rel="stylesheet" href="quick-dict-main.css">
-		<link rel="stylesheet" href="quickpopup.css">
-		<link rel="stylesheet" href="wiki-style.css">
-	</head>
-	<body>
-		<div id="container">
-			<div id="header">
-                <div id="options">
-                    <div id="languagechooser_popup">
-                        <button id="primlang" class="primary">n/a</button><button id="secolang" class="">n/a</button>
-                    </div>
-                    <div id="search_popup">
-                        <form id="searchform">
-                            <div id="searchinput">
-                                <input list="suggestions" type="text" name="text" id="inputframe" autocomplete="off" placeholder="Type something..." autofocus>
-								<datalist id="suggestions"></datalist>
-							</div>
-                        </form>
-                    </div>
-                </div>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Quick Dictionary</title>
+	<script src="main.js" charset="UTF-8"></script>
+	<script src="localize.js" charset="UTF-8"></script>
+	<link rel="stylesheet" href="modern-normalize.css">
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="quickpopup.css">
+	<link rel="stylesheet" href="wiki-style.css">
+</head>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<div id="options">
+				<div id="languagechooser_popup">
+					<button id="primlang" class="primary">n/a</button>
+					<button id="secolang" class="">n/a</button>
+				</div>
+				<div id="search_popup">
+					<form id="searchform">
+						<div id="searchinput">
+							<input list="suggestions" type="text" name="text" id="inputframe" autocomplete="off" placeholder="Type something..." autofocus>
+							<datalist id="suggestions"></datalist>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div id="main">
-				<div id="result" class="qdExt_result"><span id="nothing">Nothing here right now ʕ•ᴥ•ʔ</span></div>
-			</div>
-			<button id="totop" title="Go to top">&#9650;</button>
 		</div>
-	</body>
+		<div id="main">
+			<div id="result" class="qdExt_result">
+				<span id="nothing">Nothing here right now ʕ•ᴥ•ʔ</span>
+			</div>
+		</div>
+		<button id="totop" title="Go to top">&#9650;</button>
+	</div>
+</body>
+
 </html>

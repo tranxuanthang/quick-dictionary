@@ -20,11 +20,11 @@ function getMouseCoords(event) {
 			(doc && doc.scrollTop || body && body.scrollTop || 0) -
 			(doc && doc.clientTop || body && body.clientTop || 0);
 	}
-	return {x: event.pageX, y: event.pageY};
+	return { x: event.pageX, y: event.pageY };
 	// Use event.pageX / event.pageY here
 }
 
-function showQuickButton(x,y) {
+function showQuickButton(x, y) {
 	let txtSel = getSelection().toString();
 
 	let quickButton = document.getElementById("qdExt_quickButton");
@@ -52,19 +52,19 @@ function showQuickButton(x,y) {
 	quickButton.setAttribute("id", "qdExt_quickButton");
 	quickButton.setAttribute("style", "display: none;");
 	document.getElementsByTagName("body")[0].appendChild(quickButton);
-	
+
 	// Listen click event for "quick button"
 	quickButton.addEventListener("click", async function () {
 		// Get selected text
 		let selectedText = quickButton.getAttribute("data-selected-text").trim();
-		
+
 		// Send message to the sidebar (assuming sidebar is available)
 		chrome.runtime.sendMessage({ type: "search_for_meaning", text: selectedText });
 
 		// Check sidebar status
 		let getSidebarStatus = await browser.runtime.sendMessage({ type: "sidebar_status" });
-		//if (getSidebarStatus === undefined) getSidebarStatus = {response: false};
-		//console.log(getSidebarStatus);
+		if (getSidebarStatus === undefined) getSidebarStatus = {response: true};
+		console.log(getSidebarStatus);
 
 		// If sidebar is not available
 		if (getSidebarStatus.response == false) {
@@ -89,16 +89,27 @@ function showQuickButton(x,y) {
 	cover.addEventListener("click", function () {
 		// Remove the "quick popup"
 		document.getElementsByTagName("body")[0].removeChild(document.getElementById("qdExt_quickPopup"));
-		
+
 		// Hide the "cover"
 		cover.setAttribute("style", "display: none;");
 	});
 
 	// Handle Quick Button
-	document.addEventListener("mouseup", function (event) {
+	document.addEventListener("mouseup", async function (event) {
+		let savedData = await browser.storage.local.get({
+			quickButton: true
+		});
+		if (savedData.quickButton == false) {
+			let quickButton = document.getElementById("qdExt_quickButton");
+			if (quickButton) {
+				quickButton.setAttribute("style", "display: none;");
+			}
+			return;
+		}
+		
 		let coords = getMouseCoords(event);
-		setTimeout(function() {
+		setTimeout(function () {
 			showQuickButton(coords.x, coords.y);
-		},50);
+		}, 50);
 	});
 })();

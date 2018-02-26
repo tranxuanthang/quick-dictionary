@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Dictionary</title>
+    <script src="config.js" charset="UTF-8"></script>
+    <script src="localize.js" charset="UTF-8"></script>
+    <link rel="stylesheet" href="modern-normalize.css">
+    <link rel="stylesheet" href="config.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>Config page</h1>
+        </div>
+        <div id="main">
+            <form id="form">
+                <div class="part">
+                    <div id="quickButtonDesc" class="title">Quick Button that shows right above your selected text:</div>
+                    <div class="options">
+                        <div class="subpart">
+                            <label>
+                                <input type="radio" id="quickButtonYes" name="quickButton" value="1">
+                                <span id="textQuickButtonYes">Yes</span>
+                            </label>
+                        </div>
+                        <div class="subpart">
+                            <label>
+                                <input type="radio" id="quickButtonNo" name="quickButton" value="0">
+                                <span id="textQuickButtonNo">No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="part">
+                    <div id="wiktionaryLangDesc" class="title">Wiktionary Language (2 chars, example: vi, en, ru, ja,...):</div>
+                    <div class="options">
+                        <div class="subpart">
+                            <label>
+                                <span id="wiktionaryLang1">Language #1 (required):</span>
+                                <div>
+                                    <input autocomplete="off" type="text" id="primlang" value="" maxlength="2">
+                                </div>
+                            </label>
+                        </div>
+                        <div class="subpart">
+                            <label>
+                                <span id="wiktionaryLang2">Language #2 (optional):</span>
+                                <div>
+                                    <input autocomplete="off" type="text" id="secolang" value="" maxlength="2">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="part">
+                    <button id="submit" type="submit">Submit</button>
+                    <button id="goback">Go Back</button>
+                </div>
+            </form>
+            <div class="part">
+                <div id="error"></div>
+                <div id="note"></div>
+            </div>
+        </div>
+</body>
+
+</html>

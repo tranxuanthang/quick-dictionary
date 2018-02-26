@@ -3,11 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Quick Dictionary</title>
-		<script src="features.js" charset="UTF-8"></script>
-		<script src="quick-dict-main.js" charset="UTF-8"></script>
+		<script src="main.js" charset="UTF-8"></script>
 		<script src="localize.js" charset="UTF-8"></script>
 		<link rel="stylesheet" href="modern-normalize.css">
-		<link rel="stylesheet" href="quick-dict-main.css">
+		<link rel="stylesheet" href="main.css">
 		<link rel="stylesheet" href="wiki-style.css">
 	</head>
 	<body>
@@ -24,7 +23,14 @@
 						</div>
 					</form>
 				</div>
-				<div id="options"><button id="primlang" class="primary">n/a</button><button id="secolang" class="">n/a</button></div>
+				<div id="options">
+					<div id="languagechooser"><button id="primlang" class="primary micro">n/a</button><button id="secolang" class="micro">n/a</button></div>
+					<div class="config">
+						<form action="config.html" target="_blank">
+							<button id="configLink" class="micro">Config</button>
+						</form>
+					</div>
+				</div>
 			</div>
 			<div id="main">
 				<div id="result" class="qdExt_result"><span id="nothing">Nothing here right now ʕ•ᴥ•ʔ</span></div>

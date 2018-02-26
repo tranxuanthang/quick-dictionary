@@ -8,9 +8,12 @@
 	},
 	"default_locale": "en",
 	"web_accessible_resources": [
-		"/img/icon.png",
-		"site.js"
+		"/img/icon.png"
 	],
+	"options_ui": {
+		"page": "config.html",
+		"chrome_style": false
+	},
 	"content_scripts": [
 		{
 			"matches": [
@@ -32,7 +35,7 @@
 	},
 	"sidebar_action": {
 		"default_title": "__MSG_ext_name__",
-		"default_panel": "quick-dict-main.html",
+		"default_panel": "main.html",
 		"default_icon": "/img/icon.png"
 	},
 	"permissions": [
