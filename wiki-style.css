@@ -196,3 +196,11 @@
 	background-image: url(/img/external.png);
 	padding-right: 13px;
 }
+
+.qdExt_result audio.kskin {
+	width: 120px !important;
+}
+
+.qdExt_result .mediaContainer {
+	width: 120px !important;
+}

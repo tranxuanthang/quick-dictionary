@@ -64,7 +64,7 @@ function showQuickButton(x, y) {
 		// Check sidebar status
 		let getSidebarStatus = await browser.runtime.sendMessage({ type: "sidebar_status" });
 		if (getSidebarStatus === undefined) getSidebarStatus = {response: true};
-		console.log(getSidebarStatus);
+		//console.log(getSidebarStatus);
 
 		// If sidebar is not available
 		if (getSidebarStatus.response == false) {

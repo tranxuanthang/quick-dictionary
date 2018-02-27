@@ -24,8 +24,8 @@ function saveOptions (event) {
 
 async function restoreOptions() {
 	let savedData = await browser.storage.local.get({
-		primLang: "vi",
-		secoLang: "en",
+		primLang: "en",
+		secoLang: "",
 		quickButton: true
 	});
 

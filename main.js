@@ -152,8 +152,8 @@ async function submitHandle(event) {
 async function applySavedData() {
 	// Get saved preferences
 	let savedData = await browser.storage.local.get({
-		primLang: "vi",
-		secoLang: "en"
+		primLang: "en",
+		secoLang: ""
 	});
 
 	// Get the elements of 'primary language' and 'secondary language' switch buttons
