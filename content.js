@@ -59,15 +59,15 @@ function showQuickButton(x, y) {
 		let selectedText = quickButton.getAttribute("data-selected-text").trim();
 
 		// Send message to the sidebar (assuming sidebar is available)
-		chrome.runtime.sendMessage({ type: "search_for_meaning", text: selectedText });
-
-		// Check sidebar status
-		let getSidebarStatus = await browser.runtime.sendMessage({ type: "sidebar_status" });
-		if (getSidebarStatus === undefined) getSidebarStatus = {response: true};
-		//console.log(getSidebarStatus);
-
-		// If sidebar is not available
-		if (getSidebarStatus.response == false) {
+		let sending;
+		try{
+			sending = await browser.runtime.sendMessage({ type: "search_for_meaning", text: selectedText });
+		}
+		catch(error) {
+			sending = false;
+		}
+		console.log("sending: ", sending);
+		if(sending != true) {
 			// Show the cover
 			cover.setAttribute("style", "display: block;");
 
@@ -78,7 +78,6 @@ function showQuickButton(x, y) {
 			// Create the "quick popup"
 			let quickPopup = document.createElement("iframe");
 			quickPopup.setAttribute("id", "qdExt_quickPopup");
-			quickPopup.setAttribute("sandbox", "allow-same-origin allow-scripts");
 			quickPopup.src = browser.extension.getURL(`/quickpopup.html#input=${selectedText}`);
 			quickPopup.setAttribute("style", `top: ${y + 16}px; left: ${x}px;`);
 			document.getElementsByTagName("body")[0].appendChild(quickPopup);

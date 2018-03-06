@@ -141,7 +141,7 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 }
 
 #result #googletranslate {
-	text-align: justify;
+	text-align: center;
 	font-size: 100%;
     line-height: inherit;
 	border-left: 6px solid #4286f4;
@@ -183,6 +183,7 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 	cursor: pointer;
 	opacity: 0.1;
 	font-size: 10px;
+	min-width: 33px;
 }
 
 #totop:hover {

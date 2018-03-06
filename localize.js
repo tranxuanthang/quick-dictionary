@@ -11,4 +11,5 @@ window.onload = function(){
 	if((configSubmit = document.getElementById('submit')) !==null)configSubmit.textContent=chrome.i18n.getMessage("config_submit");
 	if((configGoBack = document.getElementById('goback')) !==null)configGoBack.textContent=chrome.i18n.getMessage("config_goback");
 	if((nothing = document.getElementById('nothing')) !==null)nothing.textContent=chrome.i18n.getMessage("popup_nothing_here");
+	if((configTitle = document.getElementById('configTitle')) !==null)configTitle.textContent=chrome.i18n.getMessage("config_title");
 };

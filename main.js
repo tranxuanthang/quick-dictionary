@@ -65,9 +65,6 @@ async function googleTranslate(keyword, language) {
 }
 
 async function smartGetResult(keyword, language, lower = false) {
-	// Replace underscores "_" with spaces " "
-	keyword = decodeURI(keyword).replace(/_/g, " ");
-
 	// Get wiktionary result and put it to #result
 	try {
 		let wiktionaryResult = await wiktionary(keyword, language, lower);
@@ -103,41 +100,68 @@ async function getWiktionarySuggestions(keyword, language) {
 	return jsonResult[1];
 }
 
-async function applyResult(keyword, language, lower = false) {
-	
+async function applyResult(keyword, language, lower = false, jumpTo = null) {
+	// Replace underscores "_" with spaces " "
+	keyword = decodeURI(keyword).replace(/_/g, " ");
+
 	// Put the searching keyword to #inputframe
 	document.getElementById("inputframe").value = keyword;
 
 	// Put the result to #result element
 	document.getElementById("result").innerHTML = chrome.i18n.getMessage("popup_getting_result");
 	let response = await smartGetResult(keyword, language, lower);
-	//console.log(response.type);
+	
+	// Reupdate the input frame to lower case, if lower = true and the result is wiktionary
 	if (response.type == "wiktionary") {
-		// Reupdate, if lower = true and the result is wiktionary
 		if (lower == true) {
 			document.getElementById("inputframe").value = keyword.toLowerCase();
 		}
 	}
+
+	// Just print the result
 	document.getElementById("result").innerHTML = response.result;
 
+	// If there is hash like #English or #Japanese,...
+	if(jumpTo != null) {
+		window.location.hash = `#${jumpTo}`;
+	}
+
+	// Add event listener for all links in the printed result
 	var links = document.getElementsByTagName("a");
 	for (let i = 0; i < links.length; i++) {
 		let item = links[i];
+
+		// Open all external links in new tab
 		item.getAttribute("href") && item.hostname !== location.hostname && (item.target = "_blank");
 
+		// Search for result after clicked a link, without reloading the page
 		links[i].addEventListener("click", async function (event) {
-			let hash = item.hash.substr(1).split("=");
-			if (hash[0] == "input") {
-				let qdInput = hash[1];
-				if (qdInput === undefined) return;
+			let hash = item.hash.substr(1).split("#");
+			let firsthash = hash[0].split("=");
+			if (firsthash[0] == "input") {
+				// Check if there is another hash
+				let jump = null;
+				if(hash[1] != undefined) {
+					jump = hash[1];
+				}
+
+				// Now find the input from URL
+				let qdInput = firsthash[1];
+				if (qdInput === undefined) {
+					return;
+				}
 				qdInput = decodeURI(qdInput);
+
+				// Apply
 				event.preventDefault();
-				applyResult(qdInput, await getCurrentLanguage(), false);
+				applyResult(qdInput, await getCurrentLanguage(), false, jump);
 			} else if (item.hostname === location.hostname) {
+				// If the first hash is not #input=
 				event.preventDefault();
-				let jumpId = hash[0];
-				if (jumpId !== undefined)
+				let jumpId = firsthash[0];
+				if (jumpId !== undefined) {
 					window.location.hash = `#${jumpId}`;
+				}
 			}
 		});
 	}
@@ -228,20 +252,29 @@ document.addEventListener("DOMContentLoaded", async function () {
 	});
 
 	// For sidebar, listen the click "quick button" event from content script
-	browser.runtime.onMessage.addListener(async function (request) {
+	browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 		if (request.type === "search_for_meaning") {
 			let inputText = request.text;
-			applyResult(inputText, await getCurrentLanguage(), true);
+			sendResponse(true);
+			(async function() {
+				applyResult(inputText, await getCurrentLanguage(), true);
+			})();
+		} else {
+			sendResponse(true);
 		}
 	});
 
 	// Check the URL after loaded, if there is a #input then get the meaning
-	let inputAtLoad = window.location.hash.substr(1).split("=")[1];
+	let urlHash = window.location.hash.substr(1).split("#");
+	console.log(urlHash);
+	let inputAtLoad = urlHash[0].split("=")[1];
+	console.log(inputAtLoad);
 	if (inputAtLoad !== undefined) {
 		inputAtLoad = decodeURI(inputAtLoad);
 		applyResult(inputAtLoad, await getCurrentLanguage(), true);
 	}
 
+	// Handle "go to top" button, at bottom right of page
 	document.getElementById("totop").addEventListener("click", function () {
 		document.getElementById("main").scrollTo(0, 0);
 	});

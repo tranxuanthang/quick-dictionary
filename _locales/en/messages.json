@@ -64,5 +64,8 @@
 	},
 	"popup_nothing_here": {
 		"message": "Nothing here right now ʕ•ᴥ•ʔ"
+	},
+	"config_title": {
+		"message": "Configuration"
 	}
 }

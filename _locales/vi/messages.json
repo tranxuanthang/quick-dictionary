@@ -64,5 +64,8 @@
 	},
 	"popup_nothing_here": {
 		"message": "Hiện giờ không có gì ở đây hết ʕ•ᴥ•ʔ"
+	},
+	"config_title": {
+		"message": "Cấu hình"
 	}
 }
