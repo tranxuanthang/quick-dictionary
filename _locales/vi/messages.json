@@ -67,5 +67,8 @@
 	},
 	"config_title": {
 		"message": "Cấu hình"
+	},
+	"translate": {
+		"message": "Dịch"
 	}
 }

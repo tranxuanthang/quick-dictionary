@@ -67,5 +67,8 @@
 	},
 	"config_title": {
 		"message": "Configuration"
+	},
+	"translate": {
+		"message": "Translate"
 	}
 }

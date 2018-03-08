@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "__MSG_ext_name__",
 	"description": "__MSG_ext_desc__",
-	"version": "2.0.0a2",
+	"version": "2.0.0",
 	"icons": {
 		"128": "/img/icon.png"
 	},
@@ -45,7 +45,8 @@
 		"https://*.wikimedia.org/",
 		"https://translation.googleapis.com/",
 		"https://upload.wikimedia.org/",
-		"storage"
+		"storage",
+		"menus"
 	],
 	"background": {
 		"scripts": [
@@ -53,7 +54,7 @@
 		]
 	},
 	"commands": {
-		"_execute_browser_action": {
+		"show_meaning": {
 			"suggested_key": {
 				"default": "Ctrl+Shift+Q",
 				"windows": "Ctrl+Shift+Q",
