@@ -1,7 +1,11 @@
+html {
+	font-size: 62.5%;
+}
+
 body {
-	font-size: 0.725rem;
+	font-size: 1.3rem;
 }
 
 button, input {
-	min-width: 33px;
+	min-width: 3.3rem;
 }

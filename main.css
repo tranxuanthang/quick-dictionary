@@ -1,35 +1,39 @@
+html {
+	font-size: 62.5%;
+}
+
 body {
 	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
 	line-height: 1.3;
-	font-size: 0.875rem;
+	font-size: 1.4rem;
 	word-wrap: break-word;
 	background-color: #fff;
 }
 
 button, input {
 	border: 0px;
-	border-radius: 2px;
-	height: 32px;
-	padding: 0 8px;
-	font-size: 13px;
+	border-radius: 0.2rem;
+	height: 3.2rem;
+	padding: 0 0.8rem;
+	font-size: 1.3rem;
 	font-weight: 400;
-	min-width: 66px;
+	min-width: 6.6rem;
 	width: auto;
 }
 
 input:not([type=submit]) {
 	color: #0c0c0d;
-	border: 1px solid rgba(12, 12, 13, 0.3);
-	font-size: 15px;
+	border: 0.1rem solid rgba(12, 12, 13, 0.3);
+	font-size: 1.5rem;
 }
 
 input:not([type=submit]):hover {
-	border: 1px solid rgba(12, 12, 13, 0.5);
+	border: 0.1rem solid rgba(12, 12, 13, 0.5);
 }
 
 input:not([type=submit]):focus {
-	border: 1px solid #0a84ff;
-	box-shadow: 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3);
+	border: 0.1rem solid #0a84ff;
+	box-shadow: 0 0 0 0.1rem #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3);
 	outline: 0;
 }
 
@@ -40,7 +44,7 @@ button, input[type="submit"] {
 }
 
 button:focus, input[type="submit"]:focus {
-	box-shadow: 0 0 0 1px #0a84ff inset, 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3);
+	box-shadow: 0 0 0 0.1rem #0a84ff inset, 0 0 0 0.1rem #0a84ff, 0 0 0 0.1rem rgba(10, 132, 255, 0.3);
 	outline: 0;
 }
 
@@ -70,9 +74,9 @@ button.primary:not([disabled]):active, input[type="submit"].primary:not([disable
 }
 
 button.micro, input[type="submit"].micro {
-	height: 24px;
-	font-size: 11px;
-	min-width: 33px;
+	height: 2.4rem;
+	font-size: 1.1rem;
+	min-width: 3.3rem;
 }
 
 button.red, input[type="submit"].red {
@@ -96,9 +100,9 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 
 #header {
 	flex: 0;
-	padding: 8px 8px 8px 8px;
+	padding: 0.8rem;
 	background-color: #f9f9fa;
-	border-bottom: 1px solid #ededf0;
+	border-bottom: 0.1rem solid #ededf0;
 }
 
 #main {
@@ -112,7 +116,7 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 }
 
 #search {
-	margin-bottom: 4px;
+	margin-bottom: 0.4rem;
 }
 
 #searchform {
@@ -121,7 +125,7 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 
 #searchinput {
 	flex: 1;
-	margin-right: 4px;
+	margin-right: 0.4rem;
 }
 
 #inputframe {
@@ -137,17 +141,17 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 }
 
 #result {
-	padding: 8px;
+	padding: 0.8rem;
 }
 
 #result #googletranslate {
 	text-align: center;
 	font-size: 100%;
     line-height: inherit;
-	border-left: 6px solid #4286f4;
-	border-right: 6px solid #4286f4;
+	border-left: 0.6rem solid #4286f4;
+	border-right: 0.6rem solid #4286f4;
 	font-weight: bold;
-	padding: 6px;
+	padding: 0.6rem;
 	color: #5e5e5e;
 }
 
@@ -173,8 +177,8 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 
 #totop {
 	position: fixed;
-	bottom: 24px;
-	right: 24px;
+	bottom: 2.4rem;
+	right: 2.4rem;
 	z-index: 99;
 	border: none;
 	outline: none;
@@ -182,8 +186,8 @@ button.red:not([disabled]):active, input[type="submit"].red:not([disabled]):acti
 	color: white;
 	cursor: pointer;
 	opacity: 0.1;
-	font-size: 10px;
-	min-width: 33px;
+	font-size: 1rem;
+	min-width: 3.3rem;
 }
 
 #totop:hover {

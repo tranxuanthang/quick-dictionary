@@ -4,7 +4,10 @@ function saveOptions (event) {
 		chrome.storage.local.set({
 			primLang: document.querySelector("#primlang").value,
 			secoLang: document.querySelector("#secolang").value,
-			quickButton: document.querySelector("input[name=\"quickButton\"]:checked").value
+			quickButton: document.querySelector("input[name=\"quickButton\"]:checked").value,
+			appearanceScale: document.querySelector("#appearanceScale").value,
+			popupWidth: document.querySelector("#popupWidth").value,
+			popupHeight: document.querySelector("#popupHeight").value
 		});
 		document.getElementById("error").textContent = "";
 		document.getElementById("note").textContent = chrome.i18n.getMessage("config_success");
@@ -26,11 +29,19 @@ async function restoreOptions() {
 	let savedData = await browser.storage.local.get({
 		primLang: "en",
 		secoLang: "",
-		quickButton: true
+		quickButton: true,
+		appearanceScale: 62.5,
+		popupWidth: 360,
+		popupHeight: 240
 	});
 
 	document.querySelector("#primlang").value = savedData.primLang || "vi";
 	document.querySelector("#secolang").value = savedData.secoLang || "";
+
+	document.querySelector("#appearanceScale").value = savedData.appearanceScale || "62.5";
+
+	document.querySelector("#popupWidth").value = savedData.popupWidth || "360";
+	document.querySelector("#popupHeight").value = savedData.popupHeight || "240";
 
 	if (savedData.quickButton == true) {
 		document.getElementById("quickButtonYes").checked = savedData.quickButton;

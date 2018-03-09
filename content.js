@@ -67,10 +67,14 @@ async function smartMeaningShow(selectedText) {
 		let y = Number(quickButton.getAttribute("data-coord-y"));
 
 		// Create the "quick popup"
+		let savedData = await browser.storage.local.get({
+			popupWidth: 360,
+			popupHeight: 240
+		});
 		let quickPopup = document.createElement("iframe");
 		quickPopup.setAttribute("id", "qdExt_quickPopup");
 		quickPopup.src = browser.extension.getURL(`/quickpopup.html#input=${selectedText}`);
-		quickPopup.setAttribute("style", `top: ${y + 16}px; left: ${x}px;`);
+		quickPopup.setAttribute("style", `width: ${savedData.popupWidth}px; height: ${savedData.popupHeight}px; top: ${y + 16}px; left: ${x}px;`);
 		document.getElementsByTagName("body")[0].appendChild(quickPopup);
 	}
 }

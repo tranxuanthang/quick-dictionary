@@ -177,8 +177,12 @@ async function applySavedData() {
 	// Get saved preferences
 	let savedData = await browser.storage.local.get({
 		primLang: "en",
-		secoLang: ""
+		secoLang: "",
+		appearanceScale: 62.5
 	});
+
+	// Apply appearance scale customization
+	document.documentElement.style.fontSize = savedData.appearanceScale+"%";
 
 	// Get the elements of 'primary language' and 'secondary language' switch buttons
 	let primLangButton = document.getElementById("primlang");
@@ -217,8 +221,9 @@ async function applySavedData() {
 /* When page is ready */
 document.addEventListener("DOMContentLoaded", async function () {
 	// Saved config/data must be loaded before we can do anything
-	await applySavedData();
-	//
+	applySavedData();
+
+	// Listen for submit button click event
 	document.getElementById("searchform").addEventListener("submit", submitHandle);
 
 	// Update word suggestions
