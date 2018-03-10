@@ -12,4 +12,8 @@ window.onload = function(){
 	if((configGoBack = document.getElementById('goback')) !==null)configGoBack.textContent=chrome.i18n.getMessage("config_goback");
 	if((nothing = document.getElementById('nothing')) !==null)nothing.textContent=chrome.i18n.getMessage("popup_nothing_here");
 	if((configTitle = document.getElementById('configTitle')) !==null)configTitle.textContent=chrome.i18n.getMessage("config_title");
+	if ((nothing = document.getElementById('appearanceScaleDesc')) !== null) nothing.textContent = chrome.i18n.getMessage("config_appearance_scale_desc");
+	if ((nothing = document.getElementById('globalSizeDesc')) !== null) nothing.textContent = chrome.i18n.getMessage("config_global_size_desc");
+	if ((nothing = document.getElementById('popupWidthDesc')) !== null) nothing.textContent = chrome.i18n.getMessage("config_popup_width_desc");
+	if ((nothing = document.getElementById('popupHeightDesc')) !== null) nothing.textContent = chrome.i18n.getMessage("config_popup_height_desc");
 };

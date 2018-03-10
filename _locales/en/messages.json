@@ -70,5 +70,17 @@
 	},
 	"translate": {
 		"message": "Translate"
+	},
+	"config_appearance_scale_desc": {
+		"message": "Appearance Scale:"
+	},
+	"config_global_size_desc": {
+		"message": "Global Size:"
+	},
+	"config_popup_width_desc": {
+		"message": "Quick Popup Width:"
+	},
+	"config_popup_height_desc": {
+		"message": "Quick Popup Height:"
 	}
 }

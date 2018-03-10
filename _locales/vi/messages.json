@@ -30,7 +30,7 @@
 		"message": "Xem thêm tại "
 	},
 	"config_quickButton_desc": {
-		"message": "Nút dịch nhanh ngay trên từ đang chọn."
+		"message": "Nút Dịch Nhanh ngay trên từ đang chọn."
 	},
 	"config_wiktionary_language_desc": {
 		"message": "Ngôn ngữ Wiktionary (2 ký tự, vd: vi, en, ru, ja,...):"
@@ -70,5 +70,17 @@
 	},
 	"translate": {
 		"message": "Dịch"
+	},
+	"config_appearance_scale_desc": {
+		"message": "Kích thước giao diện:"
+	},
+	"config_global_size_desc": {
+		"message": "Kích thước chung:"
+	},
+	"config_popup_width_desc": {
+		"message": "Chiều ngang Popup Nhanh:"
+	},
+	"config_popup_height_desc": {
+		"message": "Chiều dài Popup Nhanh:"
 	}
 }
