@@ -2,13 +2,14 @@
 	"manifest_version": 2,
 	"name": "__MSG_ext_name__",
 	"description": "__MSG_ext_desc__",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"icons": {
 		"128": "/img/icon.png"
 	},
 	"default_locale": "en",
 	"web_accessible_resources": [
-		"/img/icon.png"
+		"/img/icon.png",
+		"/quickpopup.html"
 	],
 	"options_ui": {
 		"page": "config.html",
@@ -60,7 +61,8 @@
 				"windows": "Ctrl+Shift+Q",
 				"mac": "Command+Shift+Q",
 				"linux": "Ctrl+Shift+Q"
-			}
+			},
+			"description": "Command for showing text meaning."
 		}
 	}
 }

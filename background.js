@@ -10,7 +10,6 @@ browser.menus.create({
 
 browser.menus.onClicked.addListener(function (info, tab) {
 	if (info.menuItemId == "context_find_meaning") {
-		console.log(info.selectionText);
 		browser.tabs.sendMessage(
 			tab.id,
 			{type: "show_meaning", text: info.selectionText}
@@ -26,11 +25,10 @@ browser.runtime.onInstalled.addListener(function () {
 
 browser.commands.onCommand.addListener(async function (cmd) {
 	let tab = await browser.tabs.query({currentWindow: true, active: true});
-	console.log(tab[0]);
 	if (cmd == "show_meaning") {
 		browser.tabs.sendMessage(
 			tab[0].id,
-			{ type: "show_meaning" }
+			{type: "show_meaning"}
 		);
 	}
 });

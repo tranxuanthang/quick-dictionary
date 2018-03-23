@@ -38,7 +38,7 @@ async function restoreOptions() {
 	document.querySelector("#primlang").value = savedData.primLang || "vi";
 	document.querySelector("#secolang").value = savedData.secoLang || "";
 
-	document.querySelector("#appearanceScale").value = savedData.appearanceScale || "62.5";
+	document.querySelector("#appearanceScale").value = savedData.appearanceScale || 62.5;
 
 	document.querySelector("#popupWidth").value = savedData.popupWidth || "360";
 	document.querySelector("#popupHeight").value = savedData.popupHeight || "240";

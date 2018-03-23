@@ -1,38 +1,12 @@
 "use strict";
 
-function makeRequest(method, url) {
-	return new Promise(function (resolve, reject) {
-		let xhr = new XMLHttpRequest();
-		xhr.open(method, url);
-		xhr.onload = function () {
-			if (this.status >= 200 && this.status < 300) {
-				resolve(xhr.response);
-			} else {
-				reject({
-					status: this.status,
-					statusText: xhr.statusText
-				});
-			}
-		};
-		xhr.onerror = function () {
-			reject({
-				status: this.status,
-				statusText: xhr.statusText
-			});
-		};
-		xhr.send();
-	});
-}
-
 async function wiktionary(keyword, language, lower = false) {
 	
 	if (lower == true) keyword = keyword.toLowerCase();
 	
 	let url = "https://" + language + ".wiktionary.org/w/api.php?action=parse&format=json&contentmodel=wikitext&redirects=true&prop=text&page=" + keyword;
-	
-	let rawResult = await makeRequest("GET", url);
-	let jsonResult = JSON.parse(rawResult);
-
+	let rawResult = await fetch(url);
+	let jsonResult = await rawResult.json();
 	let error = jsonResult.error;
 	
 	if (error !== undefined) throw new Error("wiktionary_not_found");
@@ -55,8 +29,8 @@ async function wiktionary(keyword, language, lower = false) {
 async function googleTranslate(keyword, language) {
 	var url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl="
 		+ "auto" + "&tl=" + language + "&dt=t&q=" + encodeURI(keyword);
-	let rawResult = await makeRequest("GET", url);
-	let jsonResult = JSON.parse(rawResult);
+	let rawResult = await fetch(url);
+	let jsonResult = await rawResult.json();
 	return jsonResult[0].map(
 		function (element) {
 			return element[0];
@@ -73,16 +47,20 @@ async function smartGetResult(keyword, language, lower = false) {
 
 	// If detect any error, try to get the meaning with Google Translate
 	catch (error) {
-		//return chrome.i18n.getMessage("popup_wiktionary_not_found") + ` Error: ${error}`;
-		let googleTranslateResult = await googleTranslate(keyword, language);
-		return { type: "gtranslate", result: `<div id="googletranslate">${googleTranslateResult}</div>` };
+		try {
+			let googleTranslateResult = await googleTranslate(keyword, language);
+			return { type: "gtranslate", result: `<div id="googletranslate">${googleTranslateResult}</div>` };
+		}
+		catch(error) {
+			throw new Error(error);
+		}
 	}
 }
 
 async function getCurrentLanguage() {
 	let currentLanguage = sessionStorage.getItem("currentLanguage");
 	//console.log(currentLanguage);
-	if (currentLanguage !== undefined) {
+	if (currentLanguage) {
 		return currentLanguage;
 	} else {
 		let savedData = await browser.storage.local.get({
@@ -95,75 +73,92 @@ async function getCurrentLanguage() {
 
 async function getWiktionarySuggestions(keyword, language) {
 	let url = `https://${language}.wiktionary.org/w/api.php?action=opensearch&search=${keyword}&limit=10&namespace=0&format=json`;
-	let rawResult = await makeRequest("GET", url);
-	let jsonResult = JSON.parse(rawResult);
+	let rawResult = await fetch(url);
+	let jsonResult = await rawResult.json();
 	return jsonResult[1];
 }
 
 async function applyResult(keyword, language, lower = false, jumpTo = null) {
 	// Replace underscores "_" with spaces " "
-	keyword = decodeURI(keyword).replace(/_/g, " ");
+	keyword = decodeURI(keyword).replace(/_/g, " ").trim();
 
 	// Put the searching keyword to #inputframe
 	document.getElementById("inputframe").value = keyword;
 
 	// Put the result to #result element
 	document.getElementById("result").innerHTML = chrome.i18n.getMessage("popup_getting_result");
-	let response = await smartGetResult(keyword, language, lower);
-	
-	// Reupdate the input frame to lower case, if lower = true and the result is wiktionary
-	if (response.type == "wiktionary") {
-		if (lower == true) {
-			document.getElementById("inputframe").value = keyword.toLowerCase();
+
+	try {
+		if (keyword.length < 1) throw new Error("qd_error_text_too_short");
+		if (keyword.length > 1500) throw new Error("qd_error_text_too_long");
+		let response = await smartGetResult(keyword, language, lower);
+		
+		// Reupdate the input frame to lower case, if lower = true and the result is wiktionary
+		if (response.type == "wiktionary") {
+			if (lower == true) {
+				document.getElementById("inputframe").value = keyword.toLowerCase();
+			}
+		}
+
+		// Just print the result
+		document.getElementById("result").innerHTML = response.result;
+
+		// If there is hash like #English or #Japanese,...
+		if(jumpTo != null) {
+			window.location.hash = `#${jumpTo}`;
+		}
+
+		// Add event listener for all links in the printed result
+		var links = document.getElementsByTagName("a");
+		for (let i = 0; i < links.length; i++) {
+			let item = links[i];
+
+			// Open all external links in new tab
+			item.getAttribute("href") && item.hostname !== location.hostname && (item.target = "_blank");
+
+			// Search for result after clicked a link, without reloading the page
+			links[i].addEventListener("click", async function (event) {
+				let hash = item.hash.substr(1).split("#");
+				let firsthash = hash[0].split("=");
+				if (firsthash[0] == "input") {
+					// Check if there is another hash
+					let jump = null;
+					if(hash[1] != undefined) {
+						jump = hash[1];
+					}
+
+					// Now find the input from URL
+					let qdInput = firsthash[1];
+					if (qdInput === undefined) {
+						return;
+					}
+					qdInput = decodeURI(qdInput);
+
+					// Apply
+					event.preventDefault();
+					applyResult(qdInput, await getCurrentLanguage(), false, jump);
+				} else if (item.hostname === location.hostname) {
+					// If the first hash is not #input=
+					event.preventDefault();
+					let jumpId = firsthash[0];
+					if (jumpId !== undefined) {
+						window.location.hash = `#${jumpId}`;
+					}
+				}
+			});
 		}
 	}
 
-	// Just print the result
-	document.getElementById("result").innerHTML = response.result;
-
-	// If there is hash like #English or #Japanese,...
-	if(jumpTo != null) {
-		window.location.hash = `#${jumpTo}`;
-	}
-
-	// Add event listener for all links in the printed result
-	var links = document.getElementsByTagName("a");
-	for (let i = 0; i < links.length; i++) {
-		let item = links[i];
-
-		// Open all external links in new tab
-		item.getAttribute("href") && item.hostname !== location.hostname && (item.target = "_blank");
-
-		// Search for result after clicked a link, without reloading the page
-		links[i].addEventListener("click", async function (event) {
-			let hash = item.hash.substr(1).split("#");
-			let firsthash = hash[0].split("=");
-			if (firsthash[0] == "input") {
-				// Check if there is another hash
-				let jump = null;
-				if(hash[1] != undefined) {
-					jump = hash[1];
-				}
-
-				// Now find the input from URL
-				let qdInput = firsthash[1];
-				if (qdInput === undefined) {
-					return;
-				}
-				qdInput = decodeURI(qdInput);
-
-				// Apply
-				event.preventDefault();
-				applyResult(qdInput, await getCurrentLanguage(), false, jump);
-			} else if (item.hostname === location.hostname) {
-				// If the first hash is not #input=
-				event.preventDefault();
-				let jumpId = firsthash[0];
-				if (jumpId !== undefined) {
-					window.location.hash = `#${jumpId}`;
-				}
-			}
-		});
+	catch (error) {
+		if (error.message == "qd_error_text_too_short") {
+			document.getElementById("result").textContent = `${browser.i18n.getMessage("popup_error_text_too_short")} (${error})`;
+		} else if (error.message == "qd_error_text_too_long") {
+			document.getElementById("result").textContent = `${browser.i18n.getMessage("popup_error_text_too_long")} (${error})`;
+		} else if (error.message == "qd_error_unvailable") {
+			document.getElementById("result").textContent = `${browser.i18n.getMessage("popup_error_unavailable")} (${error})`;
+		} else {
+			document.getElementById("result").textContent = `${browser.i18n.getMessage("popup_error_unknown")} (${error})`;
+		}
 	}
 }
 
@@ -218,8 +213,8 @@ async function applySavedData() {
 		if (inputText != "") submitHandle();
 	});
 }
-/* When page is ready */
-document.addEventListener("DOMContentLoaded", async function () {
+
+async function init() {
 	// Saved config/data must be loaded before we can do anything
 	applySavedData();
 
@@ -228,53 +223,58 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 	// Update word suggestions
 	document.getElementById("inputframe").addEventListener("keyup", async function (event) {
-		
+		if (!document.getElementById("suggestions")) {
+			let sugDataList = document.createElement("datalist");
+			sugDataList.setAttribute("id", "suggestions");
+			document.getElementById("sugwarp").appendChild(sugDataList);
+		}
 		var code = (event.keyCode);
 
 		// Submit when the user press enter in input form
 		if (event.keyCode == 13) {
-			event.preventDefault();
-			submitHandle();
-			return;
+			//event.preventDefault();
+			//submitHandle();
+			document.getElementById("sugwarp").removeChild(document.getElementById("suggestions"));
 		} else if (code < 48 || code > 90) {
-			// A-Z and 0-9 keys only
-			return;
+			// Is not A-Z and 0-9 keys
+			document.getElementById("sugwarp").removeChild(document.getElementById("suggestions"));
+		} else {
+			// Clear old suggestions
+			let suggestionsElement = document.getElementById("suggestions");
+			suggestionsElement.textContent = "";
+
+			try {
+				// Get the suggestions from wiktionary API
+				let suggestionsResult = await getWiktionarySuggestions(document.getElementById("inputframe").value, await getCurrentLanguage());
+
+				// Apply
+				suggestionsResult.map(function (item) {
+					let suggest = document.createElement("option");
+					suggest.setAttribute("value", item);
+					suggestionsElement.appendChild(suggest);
+				});
+			}
+			catch (error) {
+				document.getElementById("sugwarp").removeChild(document.getElementById("suggestions"));
+			}
 		}
-
-		// Clear old suggestions
-		let suggestionsElement = document.getElementById("suggestions");
-		suggestionsElement.textContent = "";
-
-		// Get the suggestions from wiktionary API
-		let suggestionsResult = await getWiktionarySuggestions(document.getElementById("inputframe").value, await getCurrentLanguage());
-
-		// Apply
-		suggestionsResult.map(function (item) {
-			let suggest = document.createElement("option");
-			suggest.setAttribute("value", item);
-			suggestionsElement.appendChild(suggest);
-		});
 	});
 
 	// For sidebar, listen the click "quick button" event from content script
-	browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-		if (request.type === "search_for_meaning") {
-			let inputText = request.text;
-			sendResponse(true);
-			(async function() {
+	browser.runtime.onMessage.addListener(function (request) {
+		return new Promise(async function (resolve) {
+			if (request.type === "search_for_meaning") {
+				let inputText = request.text;
 				applyResult(inputText, await getCurrentLanguage(), true);
-			})();
-		} else {
-			sendResponse(true);
-		}
+			}
+			resolve(true);
+		});
 	});
 
 	// Check the URL after loaded, if there is a #input then get the meaning
 	let urlHash = window.location.hash.substr(1).split("#");
-	console.log(urlHash);
 	let inputAtLoad = urlHash[0].split("=")[1];
-	console.log(inputAtLoad);
-	if (inputAtLoad !== undefined) {
+	if (inputAtLoad) {
 		inputAtLoad = decodeURI(inputAtLoad);
 		applyResult(inputAtLoad, await getCurrentLanguage(), true);
 	}
@@ -283,4 +283,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 	document.getElementById("totop").addEventListener("click", function () {
 		document.getElementById("main").scrollTo(0, 0);
 	});
+}
+
+/* When page is ready */
+document.addEventListener("DOMContentLoaded", function () {
+	init();
 });

@@ -34,7 +34,7 @@ function showQuickButton(x, y, display = true) {
 		}
 	} else {
 		if (display == true) {
-			quickButton.setAttribute("style", `top: ${y - 48}px; left: ${x - 8}px;`);
+			quickButton.setAttribute("style", `top: ${y - 48}px; left: ${x - 8}px; background-image: url(${browser.extension.getURL("/img/icon.png")});`);
 		} else {
 			quickButton.setAttribute("style", `top: ${y - 48}px; left: ${x - 8}px; display: none;`);
 		}
@@ -80,6 +80,20 @@ async function smartMeaningShow(selectedText) {
 }
 
 (function init() {
+	// Remove old element if exist
+	Element.prototype.remove = function () {
+		this.parentElement.removeChild(this);
+	};
+	if (document.getElementById("qdExt_cover")) {
+		document.getElementById("qdExt_cover").remove();
+	}
+	if (document.getElementById("qdExt_quickButton")) {
+		document.getElementById("qdExt_quickButton").remove();
+	}
+	if (document.getElementById("qdExt_quickPopup")) {
+		document.getElementById("qdExt_quickPopup").remove();
+	}
+
 	// Create "cover" element (a full-page size element to detect clicks outside "quick popup")
 	let cover = document.createElement("div");
 	cover.setAttribute("id", "qdExt_cover");
@@ -126,7 +140,7 @@ async function smartMeaningShow(selectedText) {
 		}, 50);
 	});
 
-	browser.runtime.onMessage.addListener(function(request) {
+	browser.runtime.onMessage.addListener(function() {
 		// Get selected text
 		let selectedText = quickButton.getAttribute("data-selected-text").trim();
 

@@ -20,6 +20,15 @@
 	"popup_wiktionary_not_found": {
 		"message": "The text you're finding the meaning was not found in Wiktionary!"
 	},
+	"popup_error_unknown": {
+		"message": "Error: Unknown error."
+	},
+	"popup_error_unavailable": {
+		"message": "Error: Searching is not available right now."
+	},
+	"popup_error_text_too_short": {
+		"message": "Error: The text you selected is too short."
+	},
 	"popup_error_text_too_long": {
 		"message": "Error: The text you selected is too long."
 	},

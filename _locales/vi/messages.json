@@ -20,8 +20,17 @@
 	"popup_wiktionary_not_found": {
 		"message": "Nội dung bạn chọn không tồn tại ở Wiktionary!"
 	},
+	"popup_error_unknown": {
+		"message": "Lỗi: Lỗi chưa biết."
+	},
+	"popup_error_unavailable": {
+		"message": "Lỗi: Không thể lấy kết quả cho nội dung cần dịch."
+	},
+	"popup_error_text_too_short": {
+		"message": "Lỗi: Nội dung cần tìm quá ngắn."
+	},
 	"popup_error_text_too_long": {
-		"message": "Lỗi: Từ bạn chọn quá dài."
+		"message": "Lỗi: Nội dung cần tìm quá dài."
 	},
 	"popup_getting_result": {
 		"message": "Đợi tý, hiện ra ngay..."
