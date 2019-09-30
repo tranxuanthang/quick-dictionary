@@ -17,10 +17,16 @@ browser.menus.onClicked.addListener(function (info, tab) {
 	}
 });
 
-browser.runtime.onInstalled.addListener(function () {
-	browser.tabs.create({
-		url: "https://tranxuanthang.github.io/quick-dictionary/index.html"
-	});
+browser.runtime.onInstalled.addListener(function (e) {
+	if (e.reason == "install") {
+		browser.tabs.create({
+			url: "https://tranxuanthang.github.io/quick-dictionary/index.html#installed"
+		});
+	} else if (e.reason == "update") {
+		browser.tabs.create({
+			url: "https://tranxuanthang.github.io/quick-dictionary/index.html#updated"
+		});
+	}
 });
 
 browser.commands.onCommand.addListener(async function (cmd) {
