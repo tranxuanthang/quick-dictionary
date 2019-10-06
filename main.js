@@ -67,13 +67,6 @@ async function getSavedData() {
 
 function getCurrentLanguage() {
 	return sessionStorage.getItem("currentLanguage");
-	//console.log(currentLanguage);
-	// if (currentLanguage) {
-	// 	return currentLanguage;
-	// } else {
-	// 	let savedData = await getSavedData();
-	// 	return savedData.primLang;
-	// }
 }
 
 async function getWiktionarySuggestions(keyword, language) {
@@ -176,7 +169,6 @@ async function submitHandle(event) {
 async function applySavedData() {
 	// Get saved preferences
 	let savedData = await getSavedData();
-	console.log(savedData);
 
 	// Apply appearance scale customization
 	document.documentElement.style.fontSize = savedData.appearanceScale+"%";
@@ -265,11 +257,12 @@ async function init() {
 	// For sidebar, listen the click "quick button" event from content script
 	browser.runtime.onMessage.addListener(function (request) {
 		return new Promise(async function (resolve) {
-			if (request.type === "search_for_meaning") {
+			let currentWindow = await browser.windows.getCurrent();
+			if (request.type === "search_for_meaning" && currentWindow.focused == true) {
 				let inputText = request.text;
 				applyResult(inputText, getCurrentLanguage(), true);
+				resolve(true);
 			}
-			resolve(true);
 		});
 	});
 
@@ -278,7 +271,6 @@ async function init() {
 	let inputAtLoad = urlHash[0].split("=")[1];
 	if (inputAtLoad) {
 		inputAtLoad = decodeURI(inputAtLoad);
-		console.log(getCurrentLanguage());
 		applyResult(inputAtLoad, getCurrentLanguage(), true);
 
 	}

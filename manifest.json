@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "__MSG_ext_name__",
 	"description": "__MSG_ext_desc__",
-	"version": "2.0.2",
+	"version": "2.0.4",
 	"icons": {
 		"128": "/img/icon.png"
 	},
@@ -57,10 +57,10 @@
 	"commands": {
 		"show_meaning": {
 			"suggested_key": {
-				"default": "Ctrl+Shift+Q",
-				"windows": "Ctrl+Shift+Q",
-				"mac": "Command+Shift+Q",
-				"linux": "Ctrl+Shift+Q"
+				"default": "Ctrl+E",
+				"windows": "Ctrl+E",
+				"mac": "Command+E",
+				"linux": "Ctrl+E"
 			},
 			"description": "Command for showing text meaning."
 		}

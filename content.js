@@ -49,6 +49,10 @@ async function smartMeaningShow(selectedText) {
 	// Try sending message to the sidebar
 	let sending;
 	try {
+		let isSidebarOpen = await browser.runtime.sendMessage({ type: "is_sidebar_open" });
+		if (!isSidebarOpen) {
+			throw new Error("sidebar_not_opened");
+		}
 		sending = await browser.runtime.sendMessage({ type: "search_for_meaning", text: selectedText });
 	}
 	catch (error) {
