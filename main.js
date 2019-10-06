@@ -57,18 +57,23 @@ async function smartGetResult(keyword, language, lower = false) {
 	}
 }
 
-async function getCurrentLanguage() {
-	let currentLanguage = sessionStorage.getItem("currentLanguage");
+async function getSavedData() {
+	return await browser.storage.local.get({
+		primLang: "en",
+		secoLang: "",
+		appearanceScale: 62.5
+	});
+}
+
+function getCurrentLanguage() {
+	return sessionStorage.getItem("currentLanguage");
 	//console.log(currentLanguage);
-	if (currentLanguage) {
-		return currentLanguage;
-	} else {
-		let savedData = await browser.storage.local.get({
-			primLang: "vi",
-			secoLang: "en"
-		});
-		return savedData.primLang;
-	}
+	// if (currentLanguage) {
+	// 	return currentLanguage;
+	// } else {
+	// 	let savedData = await getSavedData();
+	// 	return savedData.primLang;
+	// }
 }
 
 async function getWiktionarySuggestions(keyword, language) {
@@ -136,7 +141,7 @@ async function applyResult(keyword, language, lower = false, jumpTo = null) {
 
 					// Apply
 					event.preventDefault();
-					applyResult(qdInput, await getCurrentLanguage(), false, jump);
+					applyResult(qdInput, getCurrentLanguage(), false, jump);
 				} else if (item.hostname === location.hostname) {
 					// If the first hash is not #input=
 					event.preventDefault();
@@ -165,16 +170,13 @@ async function applyResult(keyword, language, lower = false, jumpTo = null) {
 async function submitHandle(event) {
 	if (event) event.preventDefault();
 	let inputText = document.getElementById("inputframe").value;
-	applyResult(inputText, await getCurrentLanguage(), false);
+	applyResult(inputText, getCurrentLanguage(), false);
 }
 
 async function applySavedData() {
 	// Get saved preferences
-	let savedData = await browser.storage.local.get({
-		primLang: "en",
-		secoLang: "",
-		appearanceScale: 62.5
-	});
+	let savedData = await getSavedData();
+	console.log(savedData);
 
 	// Apply appearance scale customization
 	document.documentElement.style.fontSize = savedData.appearanceScale+"%";
@@ -216,7 +218,7 @@ async function applySavedData() {
 
 async function init() {
 	// Saved config/data must be loaded before we can do anything
-	applySavedData();
+	await applySavedData();
 
 	// Listen for submit button click event
 	document.getElementById("searchform").addEventListener("submit", submitHandle);
@@ -245,7 +247,7 @@ async function init() {
 
 			try {
 				// Get the suggestions from wiktionary API
-				let suggestionsResult = await getWiktionarySuggestions(document.getElementById("inputframe").value, await getCurrentLanguage());
+				let suggestionsResult = await getWiktionarySuggestions(document.getElementById("inputframe").value, getCurrentLanguage());
 
 				// Apply
 				suggestionsResult.map(function (item) {
@@ -265,7 +267,7 @@ async function init() {
 		return new Promise(async function (resolve) {
 			if (request.type === "search_for_meaning") {
 				let inputText = request.text;
-				applyResult(inputText, await getCurrentLanguage(), true);
+				applyResult(inputText, getCurrentLanguage(), true);
 			}
 			resolve(true);
 		});
@@ -276,7 +278,9 @@ async function init() {
 	let inputAtLoad = urlHash[0].split("=")[1];
 	if (inputAtLoad) {
 		inputAtLoad = decodeURI(inputAtLoad);
-		applyResult(inputAtLoad, await getCurrentLanguage(), true);
+		console.log(getCurrentLanguage());
+		applyResult(inputAtLoad, getCurrentLanguage(), true);
+
 	}
 
 	// Handle "go to top" button, at bottom right of page

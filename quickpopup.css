@@ -9,3 +9,7 @@ body {
 button, input {
 	min-width: 3.3rem;
 }
+
+#main {
+	overflow: scroll;
+}

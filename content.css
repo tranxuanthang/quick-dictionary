@@ -24,13 +24,19 @@
 	left: 0;
 	z-index: 9999;
 }
-#qdExt_quickPopup {
+
+#qdExt_quickPopup_divWrapper {
 	height: 240px;
 	width: 360px;
 	position:absolute;
 	z-index:10000;
+	resize: both;
+	overflow: hidden;
+}
+#qdExt_quickPopup {
+	height: 100%;
+	width: 100%;
 	background-color: #fff;
 	border-radius: 2px;
 	border: 1px solid #ededf0;
-	resize: both;
 }

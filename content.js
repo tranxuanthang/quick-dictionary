@@ -38,7 +38,7 @@ function showQuickButton(x, y, display = true) {
 		} else {
 			quickButton.setAttribute("style", `top: ${y - 48}px; left: ${x - 8}px; display: none;`);
 		}
-		
+
 		quickButton.setAttribute("data-selected-text", txtSel);
 		quickButton.setAttribute("data-coord-x", x);
 		quickButton.setAttribute("data-coord-y", y);
@@ -71,11 +71,16 @@ async function smartMeaningShow(selectedText) {
 			popupWidth: 360,
 			popupHeight: 240
 		});
+		let quickPopupWrapper = document.createElement("div");
+		quickPopupWrapper.setAttribute("id", "qdExt_quickPopup_divWrapper");
+		quickPopupWrapper.setAttribute("style", `width: ${savedData.popupWidth}px; height: ${savedData.popupHeight}px; top: ${y + 16}px; left: ${x}px;`);
+		document.getElementsByTagName("body")[0].appendChild(quickPopupWrapper);
+
 		let quickPopup = document.createElement("iframe");
 		quickPopup.setAttribute("id", "qdExt_quickPopup");
 		quickPopup.src = browser.extension.getURL(`/quickpopup.html#input=${selectedText}`);
-		quickPopup.setAttribute("style", `width: ${savedData.popupWidth}px; height: ${savedData.popupHeight}px; top: ${y + 16}px; left: ${x}px;`);
-		document.getElementsByTagName("body")[0].appendChild(quickPopup);
+		//quickPopup.setAttribute("style", `width: ${savedData.popupWidth}px; height: ${savedData.popupHeight}px; top: ${y + 16}px; left: ${x}px;`);
+		document.getElementById("qdExt_quickPopup_divWrapper").appendChild(quickPopup);
 	}
 }
 
@@ -93,7 +98,9 @@ async function smartMeaningShow(selectedText) {
 	if (document.getElementById("qdExt_quickPopup")) {
 		document.getElementById("qdExt_quickPopup").remove();
 	}
-
+	if (document.getElementById("qdExt_quickPopup_divWrapper")) {
+		document.getElementById("qdExt_quickPopup_divWrapper").remove();
+	}
 	// Create "cover" element (a full-page size element to detect clicks outside "quick popup")
 	let cover = document.createElement("div");
 	cover.setAttribute("id", "qdExt_cover");
@@ -117,8 +124,8 @@ async function smartMeaningShow(selectedText) {
 
 	// Listen click event to "cover" element
 	cover.addEventListener("click", function () {
-		// Remove the "quick popup"
-		document.getElementsByTagName("body")[0].removeChild(document.getElementById("qdExt_quickPopup"));
+		// Remove the "quick popup wrapper"
+		document.getElementsByTagName("body")[0].removeChild(document.getElementById("qdExt_quickPopup_divWrapper"));
 
 		// Hide the "cover"
 		cover.setAttribute("style", "display: none;");
@@ -133,7 +140,7 @@ async function smartMeaningShow(selectedText) {
 		if (savedData.quickButton == false) {
 			display = false;
 		}
-		
+
 		let coords = getMouseCoords(event);
 		setTimeout(function () {
 			showQuickButton(coords.x, coords.y, display);
