@@ -1,5 +1,7 @@
 "use strict";
 
+import { getSavedData } from './utils.js';
+
 async function wiktionary(keyword, language, lower = false) {
 	
 	if (lower == true) keyword = keyword.toLowerCase();
@@ -55,14 +57,6 @@ async function smartGetResult(keyword, language, lower = false) {
 			throw new Error(error);
 		}
 	}
-}
-
-async function getSavedData() {
-	return await browser.storage.local.get({
-		primLang: "en",
-		secoLang: "",
-		appearanceScale: 62.5
-	});
 }
 
 function getCurrentLanguage() {
