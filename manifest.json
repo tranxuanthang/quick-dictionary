@@ -22,6 +22,7 @@
 				"https://*/*"
 			],
 			"js": [
+				"browser-polyfill.js",
 				"content.js"
 			],
 			"css": [
@@ -51,6 +52,7 @@
 	],
 	"background": {
 		"scripts": [
+			"browser-polyfill.js",
 			"background.js"
 		]
 	},

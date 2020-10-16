@@ -78,7 +78,7 @@ async function applyResult(keyword, language, lower = false, jumpTo = null) {
 	document.getElementById("inputframe").value = keyword;
 
 	// Put the result to #result element
-	document.getElementById("result").innerHTML = chrome.i18n.getMessage("popup_getting_result");
+	document.getElementById("result").innerHTML = browser.i18n.getMessage("popup_getting_result");
 
 	try {
 		if (keyword.length < 1) throw new Error("qd_error_text_too_short");

@@ -5,7 +5,7 @@ import { getSavedData } from './utils.js';
 function saveOptions (event) {
 	event.preventDefault();
 	if (document.querySelector("#primlang").value != document.querySelector("#secolang").value && document.querySelector("#primlang").value != "") {
-		chrome.storage.local.set({
+		browser.storage.local.set({
 			primLang: document.querySelector("#primlang").value,
 			secoLang: document.querySelector("#secolang").value,
 			quickButton: document.querySelector("input[name=\"quickButton\"]:checked").value,
@@ -14,15 +14,15 @@ function saveOptions (event) {
 			popupHeight: document.querySelector("#popupHeight").value
 		});
 		document.getElementById("error").textContent = "";
-		document.getElementById("note").textContent = chrome.i18n.getMessage("config_success");
+		document.getElementById("note").textContent = browser.i18n.getMessage("config_success");
 		setTimeout(function () { document.getElementById("note").textContent = ""; }, 1800);
 	} else if (document.querySelector("#primlang").value != document.querySelector("#secolang").value) {
-		document.getElementById("error").textContent = chrome.i18n.getMessage("config_error_1");
+		document.getElementById("error").textContent = browser.i18n.getMessage("config_error_1");
 		document.getElementById("note").textContent = "";
 		setTimeout(function () { document.getElementById("error").textContent = ""; }, 1800);
 		restoreOptions();
 	} else {
-		document.getElementById("error").textContent = chrome.i18n.getMessage("config_error_2");
+		document.getElementById("error").textContent = browser.i18n.getMessage("config_error_2");
 		document.getElementById("note").textContent = "";
 		setTimeout(function () { document.getElementById("error").textContent = ""; }, 1800);
 		restoreOptions();
