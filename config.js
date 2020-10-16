@@ -1,3 +1,7 @@
+"use strict";
+
+import { getSavedData } from './utils.js';
+
 function saveOptions (event) {
 	event.preventDefault();
 	if (document.querySelector("#primlang").value != document.querySelector("#secolang").value && document.querySelector("#primlang").value != "") {
@@ -26,22 +30,15 @@ function saveOptions (event) {
 }
 
 async function restoreOptions() {
-	let savedData = await browser.storage.local.get({
-		primLang: "en",
-		secoLang: "",
-		quickButton: true,
-		appearanceScale: 62.5,
-		popupWidth: 360,
-		popupHeight: 240
-	});
+	const savedData = await getSavedData();
 
-	document.querySelector("#primlang").value = savedData.primLang || "vi";
-	document.querySelector("#secolang").value = savedData.secoLang || "";
+	document.querySelector("#primlang").value = savedData.primLang;
+	document.querySelector("#secolang").value = savedData.secoLang;
 
-	document.querySelector("#appearanceScale").value = savedData.appearanceScale || 62.5;
+	document.querySelector("#appearanceScale").value = savedData.appearanceScale;
 
-	document.querySelector("#popupWidth").value = savedData.popupWidth || "360";
-	document.querySelector("#popupHeight").value = savedData.popupHeight || "240";
+	document.querySelector("#popupWidth").value = savedData.popupWidth;
+	document.querySelector("#popupHeight").value = savedData.popupHeight;
 
 	if (savedData.quickButton == true) {
 		document.getElementById("quickButtonYes").checked = savedData.quickButton;
