@@ -45,7 +45,7 @@ function showQuickButton(x, y, display = true) {
 	}
 }
 
-async function smartMeaningShow(selectedText) {
+async function smartMeaningShow(selectedText, mouseCoords) {
 	// Try sending message to the sidebar
 	let sending;
 	try {
@@ -65,10 +65,18 @@ async function smartMeaningShow(selectedText) {
 		let cover = document.getElementById("qdExt_cover");
 		cover.setAttribute("style", "display: block;");
 
-		// Take mouse coordinate (saved from "quick button" element attribute)
-		let quickButton = document.getElementById("qdExt_quickButton");
-		let x = Number(quickButton.getAttribute("data-coord-x"));
-		let y = Number(quickButton.getAttribute("data-coord-y"));
+		// Take mouse coordinate
+		let x
+		let y
+
+		if (mouseCoords) {
+			x = mouseCoords.x
+			y = mouseCoords.y
+		} else {
+			let quickButton = document.getElementById("qdExt_quickButton")
+			x = Number(quickButton.getAttribute("data-coord-x"))
+			y = Number(quickButton.getAttribute("data-coord-y"))
+		}
 
 		// Create the "quick popup"
 		let savedData = await browser.storage.local.get({
@@ -89,6 +97,9 @@ async function smartMeaningShow(selectedText) {
 }
 
 (function init() {
+	// Some dirty global object
+	window.quickDictionary = {}
+
 	// Remove old element if exist
 	Element.prototype.remove = function () {
 		this.parentElement.removeChild(this);
@@ -118,12 +129,12 @@ async function smartMeaningShow(selectedText) {
 	document.getElementsByTagName("body")[0].appendChild(quickButton);
 
 	// Listen click event for "quick button"
-	quickButton.addEventListener("click", async function () {
+	quickButton.addEventListener("click", async function (event) {
 		// Get selected text
 		let selectedText = quickButton.getAttribute("data-selected-text").trim();
 
 		// Show the result
-		smartMeaningShow(selectedText);
+		smartMeaningShow(selectedText, getMouseCoords(event));
 	});
 
 	// Listen click event to "cover" element
@@ -134,6 +145,33 @@ async function smartMeaningShow(selectedText) {
 		// Hide the "cover"
 		cover.setAttribute("style", "display: none;");
 	});
+
+	document.addEventListener('mousedown', () => {
+		window.quickDictionary.showDbl = false
+	})
+
+	document.addEventListener("dblclick", async function (event) {
+		let savedData = await browser.storage.local.get({
+			doubleClick: true
+		})
+
+		let doubleClick = savedData.doubleClick
+
+		if (doubleClick) {
+			let coords = getMouseCoords(event)
+			setTimeout(function () {
+				if (window.quickDictionary.showDbl) {
+					let txtSel = getSelection().toString().trim()
+					smartMeaningShow(txtSel, coords)
+					window.quickDictionary.showDbl = false
+				}
+			}, 230)
+
+			window.quickDictionary.showDbl = true
+
+			event.stopPropagation()
+		}
+	})
 
 	// Handle Quick Button
 	document.addEventListener("mouseup", async function (event) {
